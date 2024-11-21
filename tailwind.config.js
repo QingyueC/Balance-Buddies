@@ -17,39 +17,9 @@ module.exports = {
     },
     extend: {
       colors: {
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
-        background: '#FBF8EF',
-        foreground: 'hsl(var(--foreground))',
-        primary: {
-          DEFAULT: '#78B3CE',
-          foreground: 'white',
-        },
-        secondary: {
-          DEFAULT: '#C9E6F0',
-          foreground: 'black',
-        },
-        destructive: {
-          DEFAULT: '#FBF8EF',
-          foreground: 'hsl(var(--destructive-foreground))',
-        },
-        muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))',
-        },
-        accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
-        },
-        popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))',
-        },
-        card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))',
-        },
+        primary: '#78B3CE',
+        secondary: '#C9E6F0',
+        destructive:  '#FBF8EF',
         orange: "#F96E2A"
       },
       borderRadius: {

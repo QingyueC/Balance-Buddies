@@ -6,10 +6,9 @@ import { Toaster } from '@/components/ui/toaster'
 import { env } from '@/lib/env'
 import { TRPCProvider } from '@/trpc/client'
 import type { Metadata, Viewport } from 'next'
-import { NextIntlClientProvider, useTranslations } from 'next-intl'
-import { getLocale, getMessages } from 'next-intl/server'
+// import { NextIntlClientProvider, useTranslations } from 'next-intl'
 import Link from 'next/link'
-import { Suspense } from 'react'
+// import { Suspense } from 'react'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -61,7 +60,6 @@ export const viewport: Viewport = {
 }
 
 function Content({ children }: { children: React.ReactNode }) {
-  const t = useTranslations()
   return (
     <TRPCProvider>
       <header className="fixed top-0 left-0 right-0 h-16 flex justify-between bg-white dark:bg-gray-950 bg-opacity-50 dark:bg-opacity-50 p-2 border-b backdrop-blur-sm z-50">
@@ -123,26 +121,20 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const locale = await getLocale()
-  const messages = await getMessages()
   return (
-    <html lang={locale} suppressHydrationWarning>
-      <ApplePwaSplash icon="/logo-with-text.png" color="#78B3CE" />
+    <html>
       <body className="pt-16 min-h-[100dvh] flex flex-col items-stretch bg-slate-50 bg-opacity-30 dark:bg-background">
-        <NextIntlClientProvider messages={messages}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <Suspense>
-              <ProgressBar />
-            </Suspense>
-            <Content>{children}</Content>
-          </ThemeProvider>
-        </NextIntlClientProvider>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <ProgressBar />
+          <Content>{children}</Content>
+        </ThemeProvider>
       </body>
     </html>
+
   )
 }
