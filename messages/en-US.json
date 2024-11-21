@@ -1,0 +1,41 @@
+{
+  
+  "Header": {
+    "groups": "Groups"
+  },
+ 
+  
+  "Groups": {
+    "myGroups": "My groups",
+    "create": "Create",
+    "loadingRecent": "Loading recent groups…",
+    "NoRecent": {
+      "description": "No recent groups available",
+      "create": "Create one",
+      "orAsk": ""
+    },
+    "recent": "Recent groups",
+    "starred": "Starred groups",
+    "archived": "Archived groups",
+    "archive": "Archive group",
+    "unarchive": "Unarchive group",
+    "removeRecent": "Remove from recent groups",
+    "RecentRemovedToast": {
+      "title": "Group has been removed",
+      "description": "The group was removed from your recent groups list.",
+      "undoAlt": "Undo group removal",
+      "undo": "Undo"
+    },
+    "AddByURL": {
+      "button": "Add by URL",
+      "title": "Add a group by URL",
+      "description": "If a group was shared with you, you can paste its URL here to add it to your list.",
+      "error": "Oops, we are not able to find the group from the URL you provided…"
+    },
+    "NotFound": {
+      "text": "This group does not exist.",
+      "link": "Go to recently visited groups"
+    }
+  }
+ 
+}
