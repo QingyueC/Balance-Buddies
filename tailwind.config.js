@@ -17,25 +17,18 @@ module.exports = {
     },
     extend: {
       colors: {
+        border: '#78B3CE',
         primary: '#78B3CE',
         secondary: '#C9E6F0',
         destructive:  '#FBF8EF',
         orange: "#F96E2A"
       },
       borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
+        lg: '0.5rem',
+        md: 'calc(0.5rem - 2px)',
+        sm: 'calc(0.5rem - 4px)',
       },
       keyframes: {
-        'accordion-down': {
-          from: { height: 0 },
-          to: { height: 'var(--radix-accordion-content-height)' },
-        },
-        'accordion-up': {
-          from: { height: 'var(--radix-accordion-content-height)' },
-          to: { height: 0 },
-        },
         slideInFromLeft: {
           '0%': { transform: 'translateX(-100%)', opacity: '0' },
           '100%': { transform: 'translateX(0)', opacity: '1' },
@@ -46,8 +39,6 @@ module.exports = {
         }
       },
       animation: {
-        'accordion-down': 'accordion-down 0.2s ease-out',
-        'accordion-up': 'accordion-up 0.2s ease-out',
         'slideInFromLeft': 'slideInFromLeft 1s ease-out',
         'slideInFromBottom': 'slideInFromBottom 1s ease-out'
       },
@@ -64,9 +55,6 @@ module.exports = {
           'source-sans-pro',
           'sans-serif',
         ],
-      },
-      dropShadow: {
-        title: '.25vw .25vw 0 rgb(252 165 165 / var(--tw-text-opacity))',
       },
     },
   },

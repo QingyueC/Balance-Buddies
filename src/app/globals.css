@@ -2,10 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+    * {
+      @apply border-border;
+    }
+    body {
+      @apply bg-white text-black;
+    }
+  }
+
+/* 标题样式 */
 .landing-header {
-  @apply bg-gradient-to-br from-emerald-800 to-emerald-600 dark:from-emerald-300 dark:to-emerald-600 bg-clip-text;
+  @apply bg-gradient-to-br from-emerald-800 to-emerald-600 bg-clip-text;
 }
 
+/* 强调文字样式 */
 .landing-header strong {
   @apply font-bold text-transparent;
 }
