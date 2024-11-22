@@ -4,7 +4,36 @@
     "groups": "Groups"
   },
  
-  
+  "Expenses": {
+    "title": "Expenses",
+    "description": "Group Expenses",
+    "create": "Create expense",
+    "createFirst": "Add your first group expense",
+    "noExpenses": "No expense yet. You guys broke?",
+    "exportJson": "Export bill data",
+    "searchPlaceholder": "Find expense...",
+    "ActiveUserModal": {
+      "title": "Who are you?",
+      "description": "Tell us which participant you are to let us customize how the information is displayed.",
+      "nobody": "I don’t want to select anyone",
+      "save": "Save changes",
+      "footer": "This setting can be changed later in the group settings."
+    },
+    "Groups": {
+      "upcoming": "Upcoming",
+      "thisWeek": "This week",
+      "earlierThisMonth": "Earlier this month",
+      "lastMonth": "Last month",
+      "earlierThisYear": "Earlier this year",
+      "lastYera": "Last year",
+      "older": "Older"
+    }
+  },
+  "ExpenseCard": {
+    "paidBy": "Paid by <strong>{paidBy}</strong> for <paidFor></paidFor>",
+    "receivedBy": "Received by <strong>{paidBy}</strong> for <paidFor></paidFor>",
+    "yourBalance": "Your balance:"
+  },
   "Groups": {
     "myGroups": "My groups",
     "create": "Create",
