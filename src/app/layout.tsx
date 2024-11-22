@@ -1,14 +1,18 @@
 import { ApplePwaSplash } from '@/app/apple-pwa-splash'
+
 import { ProgressBar } from '@/components/progress-bar'
 import { ThemeProvider } from '@/components/theme-provider'
+
 import { Button } from '@/components/ui/button'
 import { Toaster } from '@/components/ui/toaster'
 import { env } from '@/lib/env'
 import { TRPCProvider } from '@/trpc/client'
 import type { Metadata, Viewport } from 'next'
-// import { NextIntlClientProvider, useTranslations } from 'next-intl'
+import { NextIntlClientProvider, useTranslations } from 'next-intl'
+import { getLocale, getMessages } from 'next-intl/server'
+import Image from 'next/image'
 import Link from 'next/link'
-// import { Suspense } from 'react'
+import { Suspense } from 'react'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -60,6 +64,7 @@ export const viewport: Viewport = {
 }
 
 function Content({ children }: { children: React.ReactNode }) {
+  const t = useTranslations()
   return (
     <TRPCProvider>
       <header className="fixed top-0 left-0 right-0 h-16 flex justify-between bg-white dark:bg-gray-950 bg-opacity-50 dark:bg-opacity-50 p-2 border-b backdrop-blur-sm z-50">
@@ -68,6 +73,13 @@ function Content({ children }: { children: React.ReactNode }) {
           href="/"
         >
           <h1>
+            <Image
+              src="/logo-with-text.png"
+              className="m-1 h-auto w-auto"
+              width={(35 * 522) / 180}
+              height={35}
+              alt="Spliit"
+            />
           </h1>
         </Link>
         <div role="navigation" aria-label="Menu" className="flex">
@@ -79,7 +91,7 @@ function Content({ children }: { children: React.ReactNode }) {
                 asChild
                 className="-my-3 text-primary"
               >
-                <Link href="/groups">My Bills</Link>
+                <Link href="/groups">My Groups</Link>
               </Button>
               <Button
                 variant="ghost"
@@ -100,6 +112,13 @@ function Content({ children }: { children: React.ReactNode }) {
         <div className="flex flex-col space-y-2">
           <div className="sm:text-lg font-semibold text-base flex space-x-2 items-center">
             <Link className="flex items-center gap-2" href="/">
+              <Image
+                src="/logo-with-text.png"
+                className="m-1 h-auto w-auto"
+                width={(35 * 522) / 180}
+                height={35}
+                alt="Spliit"
+              />
             </Link>
           </div>
           <div className="flex flex-col space-y a--no-underline-text-white">
@@ -121,20 +140,26 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const locale = await getLocale()
+  const messages = await getMessages()
   return (
-    <html>
+    <html lang={locale} suppressHydrationWarning>
+      <ApplePwaSplash icon="/logo-with-text.png" color="#78B3CE" />
       <body className="pt-16 min-h-[100dvh] flex flex-col items-stretch bg-slate-50 bg-opacity-30 dark:bg-background">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <ProgressBar />
-          <Content>{children}</Content>
-        </ThemeProvider>
+        <NextIntlClientProvider messages={messages}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Suspense>
+              <ProgressBar />
+            </Suspense>
+            <Content>{children}</Content>
+          </ThemeProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
-
   )
 }
