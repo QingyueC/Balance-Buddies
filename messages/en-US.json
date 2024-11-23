@@ -34,6 +34,17 @@
     "receivedBy": "Received by <strong>{paidBy}</strong> for <paidFor></paidFor>",
     "yourBalance": "Your balance:"
   },
+  "Balances": {
+    "title": "Balance Summary",
+    "description": "Check out how much everyone paid or still owes—it’s all here!",
+    "Reimbursements": {
+      "title": "Time to Settle Up",
+      "description": "Here’s a quick and easy guide to who should pay whom.",
+      "noImbursements": "Looks like everything’s squared away—no payments needed! 🎉",
+      "owes": "<strong>{from}</strong> owes <strong>{to}</strong>",
+      "markAsPaid": "Clear it"
+    }
+  },
   "Groups": {
     "myGroups": "My groups",
     "create": "Create",
