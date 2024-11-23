@@ -20,34 +20,78 @@ export function ReimbursementList({
 }: Props) {
   const locale = useLocale()
   const t = useTranslations('Balances.Reimbursements')
+
   if (reimbursements.length === 0) {
     return <p className="text-sm pb-6">{t('noImbursements')}</p>
   }
 
-  const getParticipant = (id: string) => participants.find((p) => p.id === id)
+  // Create a mapping from participant IDs to participant data for easy lookup
+  const participantsById = participants.reduce((acc, participant) => {
+    acc[participant.id] = participant
+    return acc
+  }, {} as Record<string, Participant>)
+
+  // Group reimbursements by debtor (the person who owes money)
+  const reimbursementsByDebtor = reimbursements.reduce((acc, reimbursement) => {
+    const debtorId = reimbursement.from
+    if (!acc[debtorId]) {
+      acc[debtorId] = []
+    }
+    acc[debtorId].push(reimbursement)
+    return acc
+  }, {} as Record<string, Reimbursement[]>)
+
+  // Create an array of debtors with their reimbursements
+  const debtors = Object.keys(reimbursementsByDebtor).map((debtorId) => ({
+    id: debtorId,
+    name: participantsById[debtorId]?.name || '',
+    reimbursements: reimbursementsByDebtor[debtorId],
+  }))
+
+  // Sort debtors alphabetically by name
+  debtors.sort((a, b) => a.name.localeCompare(b.name))
+
   return (
     <div className="text-sm">
-      {reimbursements.map((reimbursement, index) => (
-        <div className="py-4 flex justify-between" key={index}>
-          <div className="flex flex-col gap-1 items-start sm:flex-row sm:items-baseline sm:gap-4">
-            <div>
-              {t.rich('owes', {
-                from: getParticipant(reimbursement.from)?.name,
-                to: getParticipant(reimbursement.to)?.name,
-                strong: (chunks) => <strong>{chunks}</strong>,
-              })}
-            </div>
-            <Button variant="link" asChild className="-mx-4 -my-3">
-              <Link
-                href={`/groups/${groupId}/expenses/create?reimbursement=yes&from=${reimbursement.from}&to=${reimbursement.to}&amount=${reimbursement.amount}`}
-              >
-                {t('markAsPaid')}
-              </Link>
-            </Button>
+      {debtors.map((debtor) => {
+        // Sort reimbursements (creditors) alphabetically by name
+        debtor.reimbursements.sort((a, b) => {
+          const nameA = participantsById[a.to]?.name || ''
+          const nameB = participantsById[b.to]?.name || ''
+          return nameA.localeCompare(nameB)
+        })
+
+        return (
+          <div key={debtor.id} className="mb-6 border p-4 rounded">
+            <div className="font-bold mb-2">{debtor.name}</div>
+            {debtor.reimbursements.map((reimbursement) => {
+              const creditorName = participantsById[reimbursement.to]?.name || ''
+              return (
+                <div
+                  className="py-2 flex justify-between items-center"
+                  key={`${reimbursement.from}-${reimbursement.to}`}
+                >
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:gap-2">
+                    <span>
+                      owes <strong>{creditorName}</strong>
+                    </span>
+                    <Button variant="link" asChild className="-mx-4 -my-3">
+                      <Link
+                        href={`/groups/${groupId}/expenses/create?reimbursement=yes&from=${reimbursement.from}&to=${reimbursement.to}&amount=${reimbursement.amount}`}
+                      >
+                        {t('markAsPaid')}
+                      </Link>
+                    </Button>
+                  </div>
+                  <div>
+                    {formatCurrency(currency, reimbursement.amount, locale)}
+                  </div>
+                </div>
+              )
+            })}
           </div>
-          <div>{formatCurrency(currency, reimbursement.amount, locale)}</div>
-        </div>
-      ))}
+        )
+      })}
     </div>
   )
 }
