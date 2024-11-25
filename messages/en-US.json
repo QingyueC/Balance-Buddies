@@ -3,7 +3,48 @@
   "Header": {
     "groups": "Groups"
   },
- 
+  "GroupForm": {
+    "title": "Group information",
+    "NameField": {
+      "label": "Group name",
+      "placeholder": "Apt 1234",
+      "description": "Enter a name for your group."
+    },
+    "InformationField": {
+      "label": "Details",
+      "placeholder": "What detail is relevant to your buddies?"
+    },
+    "CurrencyField": {
+      "label": "Currency symbol",
+      "placeholder": "$, €, £…",
+      "description": "What symbol do you want to use for the currency?"
+    },
+    "Participants": {
+      "title": "Buddies",
+      "description": "Enter the name for each buddy.",
+      "protectedParticipant": "This buddy is protected and cannot be removed.",
+      "new": "New",
+      "add": "Add buddy",
+      "John": "Allen",
+      "Jane": "Hank",
+      "Jack": "Emma"
+    },
+    "Settings": {
+      "title": "Local settings",
+      "description": "These settings are set per-device, and are used to customize your experience.",
+      "ActiveUserField": {
+        "label": "Active user",
+        "placeholder": "Select a participant",
+        "none": "None",
+        "description": "User used as default for paying expenses."
+      },
+      "save": "Save",
+      "saving": "Saving…",
+      "create": "Create",
+      "creating": "Creating…",
+      "cancel": "Cancel"
+    }
+  },
   "Expenses": {
     "title": "Expenses",
     "description": "Group Expenses",
