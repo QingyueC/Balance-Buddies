@@ -1,6 +1,5 @@
 import Bill from '../../../../../public/Bill.png'
 import Image from 'next/image'
-import { CategorySelector } from '@/components/category-selector'
 import { ExpenseDocumentsInput } from '@/components/expense-documents-input'
 import { SubmitButton } from '@/components/submit-button'
 import { Button } from '@/components/ui/button'
@@ -12,11 +11,6 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@/components/ui/collapsible'
 import {
   Form,
   FormControl,
@@ -42,7 +36,6 @@ import {
   SplittingOptions,
   expenseFormSchema,
 } from '@/lib/schemas'
-import { cn } from '@/lib/utils'
 import { AppRouterOutput } from '@/trpc/routers/_app'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Save } from 'lucide-react'
@@ -51,19 +44,17 @@ import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { match } from 'ts-pattern'
 import { DeletePopup } from '../../../../components/delete-popup'
 import { extractCategoryFromTitle } from '../../../../components/expense-form-actions'
-import { Textarea } from '../../../../components/ui/textarea'
 
 const enforceCurrencyPattern = (value: string) =>
   value
-    .replace(/^\s*-/, '_') // replace leading minus with _
-    .replace(/[.,]/, '#') // replace first comma with #
-    .replace(/[-.,]/g, '') // remove other minus and commas characters
-    .replace(/_/, '-') // change back _ to minus
-    .replace(/#/, '.') // change back # to dot
-    .replace(/[^-\d.]/g, '') // remove all non-numeric characters
+    .replace(/^\s*-/, '_') 
+    .replace(/[.,]/, '#') 
+    .replace(/[-.,]/g, '') 
+    .replace(/_/, '-') 
+    .replace(/#/, '.') 
+    .replace(/[^-\d.]/g, '') 
 
 const getDefaultSplittingOptions = (
   group: NonNullable<AppRouterOutput['groups']['get']['group']>,
@@ -89,8 +80,6 @@ const getDefaultSplittingOptions = (
     parsedDefaultSplitMode.paidFor = defaultValue.paidFor
   }
 
-  // if there is a participant in the default options that does not exist anymore,
-  // remove the stale default splitting options
   for (const parsedPaidFor of parsedDefaultSplitMode.paidFor) {
     if (
       !group.participants.some(({ id }) => id === parsedPaidFor.participant)
@@ -323,24 +312,6 @@ export function ExpenseForm({
           <CardContent className="flex flex-col items-center">
             <div className='flex flex-row justify-center items-center space-x-12'>
               <div>
-                {/* category */}
-                {/* <FormField
-                  control={form.control}
-                  name="category"
-                  render={({ field }) => (
-                    <FormItem className="order-3 sm:order-2">
-                      <CategorySelector
-                        categories={categories}
-                        defaultValue={
-                          form.watch(field.name) // may be overwritten externally
-                        }
-                        onValueChange={field.onChange}
-                        isLoading={isCategoryLoading}
-                      />
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                /> */}
                 <Image src={Bill} alt="bill image" className='w-24 h-24'></Image>
               </div>
               <div>
@@ -447,7 +418,7 @@ export function ExpenseForm({
                     <Button
                       variant="link"
                       type="button"
-                      className="-my-2 -mx-4 ml-6"
+                      className="-my-2 -mx-4"
                       onClick={() => {
                         const paidFor = form.getValues().paidFor
                         const allSelected =
@@ -465,13 +436,16 @@ export function ExpenseForm({
                           shouldTouch: true,
                           shouldValidate: true,
                         })
+                        console.log('paidFor:', form.getValues().paidFor)
+                        console.log('newPaidFor:', newPaidFor)
+
                       }}
                     >
                       {form.getValues().paidFor.length ===
                         group.participants.length ? (
                         <>Clear</>
                       ) : (
-                        <>selectAll</>
+                        <>Select All</>
                       )}
                     </Button>
                   </CardTitle>
@@ -618,9 +592,9 @@ export function ExpenseForm({
         )}
 
         <div className="flex mt-4 gap-2">
-          <SubmitButton loadingContent={t(isCreate ? 'creating' : 'saving')}>
+          <SubmitButton loadingContent={isCreate ? 'creating' : 'saving'}>
             <Save className="w-4 h-4 mr-2" />
-            {t(isCreate ? 'create' : 'save')}
+            {isCreate ? 'create' : 'save'}
           </SubmitButton>
           {!isCreate && onDelete && (
             <DeletePopup
@@ -628,7 +602,7 @@ export function ExpenseForm({
             ></DeletePopup>
           )}
           <Button variant="ghost" asChild>
-            <Link href={`/groups/${group.id}`}>{t('cancel')}</Link>
+            <Link href={`/groups/${group.id}`}>cancel</Link>
           </Button>
         </div>
       </form>

@@ -19,7 +19,7 @@ export default function HomePage() {
               <Link href="/groups">Balance Bills</Link>
             </Button>
             <Button asChild variant="secondary">
-              <Link href="https://github.com/QingyueC/Balance-Buddies">
+              <Link href="https://github.com/QingyueC/Balance-Buddies/tree/master">
                 <Github className="w-4 h-4 mr-2" />
                 GitHub
               </Link>
