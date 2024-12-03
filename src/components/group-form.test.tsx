@@ -6,6 +6,7 @@ import { GroupFormValues } from '@/lib/schemas';
 
 jest.mock('next-intl', () => ({
   useTranslations: jest.fn().mockReturnValue((key: string) => key),
+  useMessages: jest.fn().mockReturnValue({}),
 }));
 
 describe('GroupForm', () => {

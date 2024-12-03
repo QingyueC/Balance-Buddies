@@ -32,6 +32,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { Textarea } from './ui/textarea'
+import { useMessages } from 'next-intl';
 
 export type Props = {
   group?: NonNullable<Awaited<ReturnType<typeof getGroup>>>
@@ -230,6 +231,7 @@ export function GroupForm({
                               <Button
                                 variant="ghost"
                                 className="text-destructive"
+                                aria-label="trash"
                                 onClick={() => remove(index)}
                                 type="button"
                                 size="icon"
