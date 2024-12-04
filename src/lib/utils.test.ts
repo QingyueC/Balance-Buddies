@@ -12,7 +12,7 @@ describe('formatCurrency', () => {
   /** Non-breaking space */
   const nbsp = '\xa0'
 
-  interface variation {
+  interface Variation {
     amount: number
     locale: string
     result: string
@@ -23,7 +23,7 @@ describe('formatCurrency', () => {
    * - `en-US` is a very common i18n fallback
    * - `de-DE` exhibited faulty behavior in previous versions
    */
-  const variations: variation[] = [
+  const variations: Variation[] = [
     {
       amount: partialAmount,
       locale: `en-US`,
@@ -59,12 +59,12 @@ describe('formatCurrency', () => {
   for (const variation of variations) {
     it(`formats ${variation.amount} in ${variation.locale} without fractions`, () => {
       expect(
-        formatCurrency(currency, variation.amount * 100, variation.locale),
+        formatCurrency(currency, variation.amount * 100, false, variation.locale)
       ).toBe(variation.result)
     })
     it(`formats ${variation.amount} in ${variation.locale} with fractions`, () => {
       expect(
-        formatCurrency(currency, variation.amount, variation.locale, true),
+        formatCurrency(currency, variation.amount, true, variation.locale)
       ).toBe(variation.result)
     })
   }

@@ -1,81 +1,108 @@
-import React from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
-import { GroupForm, Props } from './group-form';
-import { useTranslations } from 'next-intl';
-import { GroupFormValues } from '@/lib/schemas';
+import React from 'react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { GroupForm, Props } from './group-form'
+import { GroupFormValues } from '@/lib/schemas'
 
-jest.mock('next-intl', () => ({
-  useTranslations: jest.fn().mockReturnValue((key: string) => key),
-  useMessages: jest.fn().mockReturnValue({}),
-}));
+// Mock getVars
+jest.mock('../vars/getVars', () => ({
+  getVars: jest.fn((key: string) => {
+    const translations: Record<string, string> = {
+      'GroupForm.title': 'Group information',
+      'GroupForm.NameField.label': 'Group name',
+      'GroupForm.NameField.placeholder': 'Summer vacations',
+      'GroupForm.NameField.description': 'Enter a name for your group.',
+      'GroupForm.InformationField.label': 'Group information',
+      'GroupForm.InformationField.placeholder':
+        'What information is relevant to group participants?',
+      'GroupForm.Participants.title': 'Participants',
+      'GroupForm.Participants.description':
+        'Enter the name for each participant.',
+      'GroupForm.Participants.new': 'New',
+      'GroupForm.Participants.add': 'Add participant',
+      'GroupForm.Settings.create': 'Create group',
+      'GroupForm.Settings.creating': 'Creating...',
+      'GroupForm.Participants.John': 'John',
+      'GroupForm.Participants.Jane': 'Jane',
+      'GroupForm.Participants.Jack': 'Jack',
+      // Add other necessary translations here
+    }
+    return translations[key] || key
+  }),
+}))
 
 describe('GroupForm', () => {
-  const mockOnSubmit = jest.fn();
+  const mockOnSubmit = jest.fn()
 
   const defaultProps: Props = {
     onSubmit: mockOnSubmit,
-  };
+  }
 
   afterEach(() => {
-    jest.clearAllMocks();
-  });
+    jest.clearAllMocks()
+  })
 
   test('renders the form with default values', () => {
-    render(<GroupForm {...defaultProps} />);
+    render(<GroupForm {...defaultProps} />)
 
-    expect(screen.getByText('title')).toBeInTheDocument();
+    // Use getByRole with level and name to disambiguate headings
+    expect(
+      screen.getByRole('heading', { level: 3, name: 'Group information' })
+    ).toBeInTheDocument()
 
-    expect(screen.getByLabelText('NameField.label')).toBeInTheDocument();
+    expect(screen.getByLabelText('Group name')).toBeInTheDocument()
 
-    expect(screen.getByText('Participants.title')).toBeInTheDocument();
-  });
+    expect(
+      screen.getByRole('heading', { level: 3, name: 'Participants' })
+    ).toBeInTheDocument()
+  })
 
   test('allows the user to fill out and submit the form', async () => {
-    render(<GroupForm {...defaultProps} />);
+    render(<GroupForm {...defaultProps} />)
 
-    fireEvent.change(screen.getByLabelText('NameField.label'), {
+    fireEvent.change(screen.getByLabelText('Group name'), {
       target: { value: 'Test Group' },
-    });
+    })
 
-    fireEvent.change(screen.getByLabelText('InformationField.label'), {
-      target: { value: 'This is a test group.' },
-    });
+    // Specify that we're targeting the textarea
+    fireEvent.change(
+      screen.getByLabelText('Group information', { selector: 'textarea' }),
+      {
+        target: { value: 'This is a test group.' },
+      }
+    )
 
-    fireEvent.click(screen.getByText('Settings.create'));
+    fireEvent.click(screen.getByText('Create group'))
 
     await waitFor(() => {
-      expect(mockOnSubmit).toHaveBeenCalledTimes(1);
-    });
+      expect(mockOnSubmit).toHaveBeenCalledTimes(1)
+    })
 
     const expectedValues: GroupFormValues = {
       name: 'Test Group',
       information: 'This is a test group.',
       currency: '$',
-      participants: [
-        { name: 'Participants.John' },
-        { name: 'Participants.Jane' },
-        { name: 'Participants.Jack' },
-      ],
-    };
+      participants: [{ name: 'John' }, { name: 'Jane' }, { name: 'Jack' }],
+    }
 
-    expect(mockOnSubmit).toHaveBeenCalledWith(expectedValues, undefined);
-  });
+    expect(mockOnSubmit).toHaveBeenCalledWith(expectedValues, undefined)
+  })
 
   test('allows the user to add and remove participants', () => {
-    render(<GroupForm {...defaultProps} />);
+    render(<GroupForm {...defaultProps} />)
 
-    fireEvent.click(screen.getByText('Participants.add'));
+    fireEvent.click(screen.getByText('Add participant'))
 
-    const participantInputs = screen.getAllByPlaceholderText('Participants.new');
-    expect(participantInputs.length).toBe(4);
+    const participantInputs = screen.getAllByPlaceholderText('New')
+    expect(participantInputs.length).toBe(4)
 
     fireEvent.change(participantInputs[3], {
       target: { value: 'New Participant' },
-    });
+    })
 
-    const deleteButtons = screen.getAllByRole('button', { name: /trash/i });
-    fireEvent.click(deleteButtons[3]);
+    // Use getAllByLabelText since the buttons have aria-label="trash"
+    const deleteButtons = screen.getAllByLabelText('trash')
+    fireEvent.click(deleteButtons[3])
 
-    expect(screen.getAllByPlaceholderText('Participants.new').length).toBe(3);
-  });
-});
+    expect(screen.getAllByPlaceholderText('New').length).toBe(3)
+  })
+})
