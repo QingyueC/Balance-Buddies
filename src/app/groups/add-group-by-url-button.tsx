@@ -9,7 +9,7 @@ import {
 import { useMediaQuery } from '@/lib/hooks'
 import { trpc } from '@/trpc/client'
 import { Loader2, Plus } from 'lucide-react'
-import { useTranslations } from 'next-intl'
+import { getVars } from '../../vars/getVars'
 import { useState } from 'react'
 
 type Props = {
@@ -17,7 +17,7 @@ type Props = {
 }
 
 export function AddGroupByUrlButton({ reload }: Props) {
-  const t = useTranslations('Groups.AddByURL')
+  const t = (key: string, params?: Record<string, string | number>) => getVars(`Groups.AddByURL.${key}`, params);
   const isDesktop = useMediaQuery('(min-width: 640px)')
   const [url, setUrl] = useState('')
   const [error, setError] = useState(false)

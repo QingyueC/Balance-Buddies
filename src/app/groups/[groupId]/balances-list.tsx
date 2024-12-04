@@ -1,7 +1,6 @@
 import { Balances } from '@/lib/balances'
 import { cn, formatCurrency } from '@/lib/utils'
 import { Participant } from '@prisma/client'
-import { useLocale } from 'next-intl'
 
 type Props = {
   balances: Balances
@@ -10,7 +9,6 @@ type Props = {
 }
 
 export function BalancesList({ balances, participants, currency }: Props) {
-  const locale = useLocale()
 
   // Sort participants alphabetically by name
   const sortedParticipants = [...participants].sort((a, b) =>
@@ -38,7 +36,7 @@ export function BalancesList({ balances, participants, currency }: Props) {
             <tr key={participant.id}>
               <td className="p-2">{participant.name}</td>
               <td className={`p-2 text-right ${balanceClass}`}>
-                {formatCurrency(currency, balance, locale)}
+                {formatCurrency(currency, balance)}
               </td>
             </tr>
           )

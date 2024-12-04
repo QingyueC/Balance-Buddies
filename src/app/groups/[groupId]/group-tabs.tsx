@@ -1,6 +1,6 @@
 'use client'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { useTranslations } from 'next-intl'
+import { getVars } from '@/vars/getVars'
 import { usePathname, useRouter } from 'next/navigation'
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 }
 
 export function GroupTabs({ groupId }: Props) {
-  const t = useTranslations()
+  const t = (key: string, params?: Record<string, string | number>) => getVars(`.${key}`, params);
   const pathname = usePathname()
   const value =
     pathname.replace(/\/groups\/[^\/]+\/([^/]+).*/, '$1') || 'expenses'
@@ -25,9 +25,6 @@ export function GroupTabs({ groupId }: Props) {
       <TabsList>
         <TabsTrigger value="expenses">Expenses</TabsTrigger>
         <TabsTrigger value="balances">Balances</TabsTrigger>
-        {/* <TabsTrigger value="information">{t('Information.title')}</TabsTrigger>
-        <TabsTrigger value="stats">{t('Stats.title')}</TabsTrigger>
-        <TabsTrigger value="activity">{t('Activity.title')}</TabsTrigger> */}
         <TabsTrigger value="edit">Bill Group</TabsTrigger>
       </TabsList>
     </Tabs>

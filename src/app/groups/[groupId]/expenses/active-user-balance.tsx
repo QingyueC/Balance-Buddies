@@ -2,7 +2,7 @@
 import { Money } from '@/components/money'
 import { getBalances } from '@/lib/balances'
 import { useActiveUser } from '@/lib/hooks'
-import { useTranslations } from 'next-intl'
+import { getVars } from '@/vars/getVars'
 
 type Props = {
   groupId: string
@@ -11,7 +11,7 @@ type Props = {
 }
 
 export function ActiveUserBalance({ groupId, currency, expense }: Props) {
-  const t = useTranslations('ExpenseCard')
+  const t = (key: string, params?: Record<string, string | number>) => getVars(`ExpenseCard.${key}`, params);
   const activeUserId = useActiveUser(groupId)
   if (activeUserId === null || activeUserId === '' || activeUserId === 'None') {
     return null

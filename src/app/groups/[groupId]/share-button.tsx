@@ -9,16 +9,16 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover'
 import { useBaseUrl } from '@/lib/hooks'
+import { getVars } from '@/vars/getVars'
 import { Group } from '@prisma/client'
 import { Share } from 'lucide-react'
-import { useTranslations } from 'next-intl'
 
 type Props = {
   group: Group
 }
 
 export function ShareButton({ group }: Props) {
-  const t = useTranslations('Share')
+  const t = (key: string, params?: Record<string, string | number>) => getVars(`Share.${key}`, params);
   const baseUrl = useBaseUrl()
   const url = baseUrl && `${baseUrl}/groups/${group.id}/expenses?ref=share`
 

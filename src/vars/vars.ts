@@ -1,3 +1,4 @@
+const vars = 
 {
   "Homepage": {
     "title": "Share <strong>Expenses</strong> with <strong>Friends & Family</strong>",
@@ -243,14 +244,14 @@
     }
   },
   "Balances": {
-    "title": "Balances",
-    "description": "This is the amount that each participant paid or was paid for.",
+    "title": "Balance Summary",
+    "description": "Check out how much everyone paid or still owes—it’s all here!",
     "Reimbursements": {
-      "title": "Suggested reimbursements",
-      "description": "Here are suggestions for optimized reimbursements between participants.",
-      "noImbursements": "It looks like your group doesn’t need any reimbursement 😁",
+      "title": "Time to Settle Up",
+      "description": "Here’s a quick and easy guide to who should pay whom.",
+      "noImbursements": "Looks like everything’s squared away—no payments needed! 🎉",
       "owes": "<strong>{from}</strong> owes <strong>{to}</strong>",
-      "markAsPaid": "Mark as paid"
+      "markAsPaid": "Clear it"
     }
   },
   "Stats": {
@@ -296,7 +297,6 @@
   },
   "Locale": {
     "en-US": "English",
-    "zh-CN": "Chinese (Simplified)"
   },
   "Share": {
     "title": "Share",
@@ -390,3 +390,5 @@
     }
   }
 }
+
+export default vars;

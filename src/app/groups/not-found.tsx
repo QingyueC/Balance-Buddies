@@ -1,9 +1,9 @@
 import { Button } from '@/components/ui/button'
-import { useTranslations } from 'next-intl'
+import { getVars } from '@/vars/getVars';
 import Link from 'next/link'
 
 export default function NotFound() {
-  const t = useTranslations('Groups.NotFound')
+  const t = (key: string, params?: Record<string, string | number>) => getVars(`Groups.NotFound.${key}`, params);
   return (
     <div className="flex flex-col gap-2">
       <p>{t('text')}</p>
