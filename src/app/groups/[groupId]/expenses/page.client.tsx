@@ -24,61 +24,49 @@ export const metadata: Metadata = {
 };
 
 export default function GroupExpensesPageClient({
-  enableReceiptExtract,
-}: {
+                                                  enableReceiptExtract,
+                                                }: {
   enableReceiptExtract: boolean;
 }) {
   const t = (key: string, params?: Record<string, string | number>) => getVars(`Expenses.${key}`, params);
   const { groupId } = useCurrentGroup();
 
   return (
-    <>
-      <Card className="mb-4 rounded-none -mx-4 border-x-0 sm:border-x sm:rounded-lg sm:mx-0">
-        <div className="flex flex-1">
-          <CardHeader className="flex-1 p-4 sm:p-6">
-            <CardTitle>{t('title')}</CardTitle>
-            <CardDescription>{t('description')}</CardDescription>
-          </CardHeader>
-          <CardHeader className="p-4 sm:p-6 flex flex-row space-y-0 gap-2">
-            {/* Updated Export JSON Button */}
-            <Button variant="secondary" className="flex items-center px-4 py-2">
-              <Link
-                prefetch={false}
-                href={`/groups/${groupId}/expenses/export/json`}
-                target="_blank"
-                title={t('exportJson')}
-                className="flex items-center gap-2"
+      <>
+        <Card className="mb-4 rounded-none -mx-4 border-x-0 sm:border-x sm:rounded-lg sm:mx-0">
+          <div className="flex flex-1">
+            <CardHeader className="flex-1 p-4 sm:p-6">
+              <CardTitle>{('title')}</CardTitle>
+              <CardDescription>{('description')}</CardDescription>
+            </CardHeader>
+            <CardHeader className="p-4 sm:p-6 flex flex-row space-y-0 gap-2">
+
+              { <CreateFromReceiptButton />}
+              {/* Updated Create Button */}
+              <Button
+                  variant="default" // or "secondary" depending on your design system
+                  className="flex items-center px-4 py-2"
+                  asChild
               >
-                <Download className="w-4 h-4" />
-                <span>Import From Image</span>
-              </Link>
-            </Button>
-            {enableReceiptExtract && <CreateFromReceiptButton />}
-            {/* Updated Create Button */}
-            <Button
-              variant="default" // or "secondary" depending on your design system
-              className="flex items-center px-4 py-2"
-              asChild
-            >
-              <Link
-                href={`/groups/${groupId}/expenses/create`}
-                title={t('create')}
-                className="flex items-center gap-2"
-              >
-                <Plus className="w-4 h-4" />
-                <span>{t('create')}</span>
-              </Link>
-            </Button>
+                <Link
+                    href={`/groups/${groupId}/expenses/create`}
+                    title={t('create')}
+                    className="flex items-center gap-2"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span>{t('create')}</span>
+                </Link>
+              </Button>
 
-          </CardHeader>
-        </div>
+            </CardHeader>
+          </div>
 
-        <CardContent className="p-0 pt-2 pb-4 sm:pb-6 flex flex-col gap-4 relative">
-          <ExpenseList />
-        </CardContent>
-      </Card>
+          <CardContent className="p-0 pt-2 pb-4 sm:pb-6 flex flex-col gap-4 relative">
+            <ExpenseList />
+          </CardContent>
+        </Card>
 
-      <ActiveUserModal groupId={groupId} />
-    </>
+        <ActiveUserModal groupId={groupId} />
+      </>
   );
 }
