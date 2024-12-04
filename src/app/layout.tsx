@@ -93,14 +93,14 @@ function Content({ children }: { children: React.ReactNode }) {
               >
                 <Link href="/groups">My Groups</Link>
               </Button>
-              <Button
+              {/* <Button
                 variant="ghost"
                 size="sm"
                 asChild
                 className="-my-3 text-primary"
               >
                 <Link href="/groups">Log in</Link>
-              </Button>
+              </Button> */}
             </li>
           </ul>
         </div>
@@ -109,7 +109,7 @@ function Content({ children }: { children: React.ReactNode }) {
       <div className="flex-1 flex flex-col">{children}</div>
 
       <footer className="sm:p-8 md:px-16 sm:mt-16 sm:text-sm md:text-base md:mt-12 bg-slate-50 dark:bg-card border-t p-6 mt-8 flex flex-col sm:flex-row sm:justify-between gap-4 text-xs [&_a]:underline">
-        <div className="flex flex-col space-y-2">
+        <div className="flex flex-row items-center justify-between w-full">
           <div className="sm:text-lg font-semibold text-base flex space-x-2 items-center">
             <Link className="flex items-center gap-2" href="/">
               <Image

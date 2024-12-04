@@ -50,7 +50,7 @@ export default function GroupExpensesPageClient({
                 className="flex items-center gap-2"
               >
                 <Download className="w-4 h-4" />
-                <span>{t('exportJson')}</span>
+                <span>Import From Image</span>
               </Link>
             </Button>
             {enableReceiptExtract && <CreateFromReceiptButton />}

@@ -9,7 +9,7 @@ export default function HomePage() {
       <section className="py-16 md:pt-24 lg:pt-32">
         <div className="container flex max-w-screen-lg flex-col items-center gap-4 text-center">
           <h1 className="animate-slideInFromLeft leading-loose font-bold text-2xl sm:text-3xl md:text-4xl lg:text-5xl py-2">
-            <span className='text-primary'>Balance</span> your <span className='text-primary'>Bills</span> with Friends, Roomates and Family
+            <span className='text-primary'>Balance</span> your <span className='text-primary'>Bills</span> with Friends, Roommates and Family
           </h1>
           <p className="max-w-[42rem] leading-normal text-muted-foreground sm:text-xl sm:leading-8">
             Welcome to Balance Buddies! A simple way to keep track of shared expenses and split bills with friends, roommates, and family.
