@@ -15,31 +15,39 @@ type Expense = Awaited<ReturnType<typeof getGroupExpenses>>[number];
 
 
 function Participants({ expense }: { expense: Expense }) {
-  const t = (key: string, params?: Record<string, string | number>) => getVars(`ExpenseCard.${key}`, params);
+  const t = (key: string) => getVars(`ExpenseCard.${key}`);
+
   const key = expense.amount > 0 ? 'paidBy' : 'receivedBy';
-  const paidForJSX = expense.paidFor.map((participant, index) => (
+  const paidForFiltered = expense.paidFor.filter(
+    (participant) => participant.participant.name !== expense.paidBy.name
+  );
+  const paidForJSX = paidForFiltered.map((participant, index) => (
     <React.Fragment key={index}>
       {index > 0 && ', '}
       <strong>{participant.participant.name}</strong>
     </React.Fragment>
   ));
+
   const rawTranslation = t(key);
+
   const participants = rawTranslation.split(/(<[^>]+>|{[^}]+})/g).map((chunk, index) => {
     if (chunk.startsWith('{') && chunk.endsWith('}')) {
-      const placeholder = chunk.slice(1, -1);
+      const placeholder = chunk.slice(1, -1); 
       if (placeholder === 'paidBy') {
         return <strong key={index}>{expense.paidBy.name}</strong>;
       } else if (placeholder === 'paidFor') {
         return <React.Fragment key={index}>{paidForJSX}</React.Fragment>;
       }
-    } else if (chunk.startsWith('<') && chunk.endsWith('>')) {
-      const tagName = chunk.replace(/[<>/]/g, '');
-      if (tagName === 'strong') {
-        return <strong key={index} />;
-      } else if (tagName === 'paidFor') {
-        return <React.Fragment key={index}>{paidForJSX}</React.Fragment>;
-      }
+    } else if (chunk === '<strong>') {
+      return <strong key={index} />;
+    } else if (chunk === '</strong>') {
+      return null; 
+    } else if (chunk === '<paidFor>') {
+      return <React.Fragment key={index}>{paidForJSX}</React.Fragment>;
+    } else if (chunk === '</paidFor>') {
+      return null; 
     }
+
     return <React.Fragment key={index}>{chunk}</React.Fragment>;
   });
 
