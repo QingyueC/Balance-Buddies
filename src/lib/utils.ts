@@ -15,10 +15,9 @@ export type DateTimeStyle = NonNullable<
 >['dateStyle']
 export function formatDate(
   date: Date,
-  locale: string,
   options: { dateStyle?: DateTimeStyle; timeStyle?: DateTimeStyle } = {},
 ) {
-  return date.toLocaleString(locale, {
+  return date.toLocaleString('en-US', {
     ...options,
     timeZone: 'UTC',
   })
@@ -36,10 +35,9 @@ export function formatCategoryForAIPrompt(category: Category) {
 export function formatCurrency(
   currency: string,
   amount: number,
-  locale: string,
   fractions?: boolean,
 ) {
-  const format = new Intl.NumberFormat(locale, {
+  const format = new Intl.NumberFormat('en-US', {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
     style: 'currency',
@@ -50,9 +48,9 @@ export function formatCurrency(
   return formattedAmount.replace('€', currency)
 }
 
-export function formatFileSize(size: number, locale: string) {
+export function formatFileSize(size: number) {
   const formatNumber = (num: number) =>
-    num.toLocaleString(locale, {
+    num.toLocaleString('en-US', {
       minimumFractionDigits: 0,
       maximumFractionDigits: 1,
     })

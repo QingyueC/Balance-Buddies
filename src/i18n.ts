@@ -7,7 +7,7 @@ export const locales = [
 export type Locale = (typeof locales)[number]
 export type Locales = ReadonlyArray<Locale>
 export const defaultLocale: Locale = 'en-US'
-console.log('Locale being loaded:', locales);
+// console.log('Locale being loaded:', locales);
 
 
 export default getRequestConfig(async () => {

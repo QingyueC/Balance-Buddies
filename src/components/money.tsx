@@ -1,6 +1,5 @@
 'use client'
 import { cn, formatCurrency } from '@/lib/utils'
-import { useLocale } from 'next-intl'
 
 type Props = {
   currency: string
@@ -15,7 +14,6 @@ export function Money({
   bold = false,
   colored = false,
 }: Props) {
-  const locale = useLocale()
   return (
     <span
       className={cn(
@@ -27,7 +25,7 @@ export function Money({
         bold && 'font-bold',
       )}
     >
-      {formatCurrency(currency, amount, locale)}
+      {formatCurrency(currency, amount)}
     </span>
   )
 }
