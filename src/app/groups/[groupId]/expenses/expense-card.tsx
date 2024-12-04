@@ -16,46 +16,34 @@ type Expense = Awaited<ReturnType<typeof getGroupExpenses>>[number];
 
 
 function Participants({ expense }: { expense: Expense }) {
-  // const t = useTranslations('ExpenseCard');
   const t = (key: string, params?: Record<string, string | number>) => getVars(`ExpenseCard.${key}`, params);
   const key = expense.amount > 0 ? 'paidBy' : 'receivedBy';
-  const paidFor = expense.paidFor.map((paidFor, index) => (
-    <Fragment key={index}>
-      {index !== 0 && <>, </>}
-      <strong>{paidFor.participant.name}</strong>
-    </Fragment>
+  const paidForJSX = expense.paidFor.map((participant, index) => (
+    <React.Fragment key={index}>
+      {index > 0 && ', '}
+      <strong>{participant.participant.name}</strong>
+    </React.Fragment>
   ));
-  // const participants = t.rich(key, {
-  //   strong: (chunks) => <strong>{chunks}</strong>,
-  //   paidBy: expense.paidBy.name,
-  //   paidFor: () => paidFor,
-  //   forCount: expense.paidFor.length,
-  // });
   const rawTranslation = t(key);
-  const participants = rawTranslation.split(/({[^}]+})/g).map((chunk, index) => {
+  const participants = rawTranslation.split(/(<[^>]+>|{[^}]+})/g).map((chunk, index) => {
     if (chunk.startsWith('{') && chunk.endsWith('}')) {
-      const placeholder = chunk.slice(1, -1); // Extract placeholder key (e.g., "strong")
-      if (placeholder === 'strong') {
-        return <strong key={index}>participants</strong>;
-      } else if (placeholder === 'paidBy') {
-        return <span key={index}>{expense.paidBy.name}</span>;
+      const placeholder = chunk.slice(1, -1);
+      if (placeholder === 'paidBy') {
+        return <strong key={index}>{expense.paidBy.name}</strong>;
       } else if (placeholder === 'paidFor') {
-        return (
-          <span key={index}>
-            {paidFor.map((person, i) => (
-              <span key={i}>
-                {person}
-                {i < paidFor.length - 1 ? ', ' : ''}
-              </span>
-            ))}
-          </span>
-        );
-      } else if (placeholder === 'forCount') {
-        return <span key={index}>{expense.paidFor.length}</span>;
+        return <React.Fragment key={index}>{paidForJSX}</React.Fragment>;
+      }
+    } else if (chunk.startsWith('<') && chunk.endsWith('>')) {
+      const tagName = chunk.replace(/[<>/]/g, '');
+      if (tagName === 'strong') {
+        return <strong key={index} />;
+      } else if (tagName === 'paidFor') {
+        return <React.Fragment key={index}>{paidForJSX}</React.Fragment>;
       }
     }
-    return <span key={index}>{chunk}</span>; // Render static text
+    return <React.Fragment key={index}>{chunk}</React.Fragment>;
   });
+
   return <>{participants}</>;
 }
 
