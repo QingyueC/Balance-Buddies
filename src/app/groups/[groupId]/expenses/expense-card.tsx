@@ -3,28 +3,54 @@ import { ActiveUserBalance } from '@/app/groups/[groupId]/expenses/active-user-b
 import { CategoryIcon } from '@/app/groups/[groupId]/expenses/category-icon';
 import { getGroupExpenses } from '@/lib/api';
 import { cn, formatCurrency, formatDate } from '@/lib/utils';
+import { getVars } from '@/vars/getVars';
 import { Calendar } from 'lucide-react'; // Importing the Calendar icon
-import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from 'next/navigation';
+import React from 'react';
 import { Fragment } from 'react';
 
 type Expense = Awaited<ReturnType<typeof getGroupExpenses>>[number];
 
+
+
+
 function Participants({ expense }: { expense: Expense }) {
-  const t = useTranslations('ExpenseCard');
+  const t = (key: string) => getVars(`ExpenseCard.${key}`);
+
   const key = expense.amount > 0 ? 'paidBy' : 'receivedBy';
-  const paidFor = expense.paidFor.map((paidFor, index) => (
-    <Fragment key={index}>
-      {index !== 0 && <>, </>}
-      <strong>{paidFor.participant.name}</strong>
-    </Fragment>
+  const paidForFiltered = expense.paidFor.filter(
+    (participant) => participant.participant.name !== expense.paidBy.name
+  );
+  const paidForJSX = paidForFiltered.map((participant, index) => (
+    <React.Fragment key={index}>
+      {index > 0 && ', '}
+      <strong>{participant.participant.name}</strong>
+    </React.Fragment>
   ));
-  const participants = t.rich(key, {
-    strong: (chunks) => <strong>{chunks}</strong>,
-    paidBy: expense.paidBy.name,
-    paidFor: () => paidFor,
-    forCount: expense.paidFor.length,
+
+  const rawTranslation = t(key);
+
+  const participants = rawTranslation.split(/(<[^>]+>|{[^}]+})/g).map((chunk, index) => {
+    if (chunk.startsWith('{') && chunk.endsWith('}')) {
+      const placeholder = chunk.slice(1, -1); 
+      if (placeholder === 'paidBy') {
+        return <strong key={index}>{expense.paidBy.name}</strong>;
+      } else if (placeholder === 'paidFor') {
+        return <React.Fragment key={index}>{paidForJSX}</React.Fragment>;
+      }
+    } else if (chunk === '<strong>') {
+      return <strong key={index} />;
+    } else if (chunk === '</strong>') {
+      return null; 
+    } else if (chunk === '<paidFor>') {
+      return <React.Fragment key={index}>{paidForJSX}</React.Fragment>;
+    } else if (chunk === '</paidFor>') {
+      return null; 
+    }
+
+    return <React.Fragment key={index}>{chunk}</React.Fragment>;
   });
+
   return <>{participants}</>;
 }
 
@@ -36,7 +62,6 @@ type Props = {
 
 export function ExpenseCard({ expense, currency, groupId }: Props) {
   const router = useRouter();
-  const locale = useLocale();
 
   return (
     <div
@@ -78,12 +103,12 @@ export function ExpenseCard({ expense, currency, groupId }: Props) {
             expense.isReimbursement && 'italic',
           )}
         >
-          {formatCurrency(currency, expense.amount, locale)}
+          {formatCurrency(currency, expense.amount)}
         </div>
         <div className="flex items-center text-xs text-muted-foreground gap-1">
           <Calendar className="w-4 h-4 text-muted-foreground" />
           <span>
-            {formatDate(expense.expenseDate, locale, { dateStyle: 'medium' })}
+            {formatDate(expense.expenseDate, { dateStyle: 'medium' })}
           </span>
         </div>
       </div>

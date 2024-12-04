@@ -6,12 +6,12 @@ import { SearchBar } from '@/components/ui/search-bar'
 import { Skeleton } from '@/components/ui/skeleton'
 import { trpc } from '@/trpc/client'
 import dayjs, { type Dayjs } from 'dayjs'
-import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { forwardRef, useEffect, useMemo, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { useDebounce } from 'use-debounce'
 import { useCurrentGroup } from '../current-group-context'
+import { getVars } from '@/vars/getVars'
 
 const PAGE_SIZE = 20
 
@@ -114,7 +114,7 @@ const ExpenseListForSearch = ({
     utils.groups.expenses.invalidate()
   }, [utils])
 
-  const t = useTranslations('Expenses')
+  const t = (key: string, params?: Record<string, string | number>) => getVars(`Expenses.${key}`, params);
   const { ref: loadingRef, inView } = useInView()
 
   const {

@@ -29,17 +29,17 @@ import { useMediaQuery } from '@/lib/hooks'
 import { formatCurrency, formatDate, formatFileSize } from '@/lib/utils'
 import { trpc } from '@/trpc/client'
 import { ChevronRight, FileQuestion, Loader2, Receipt } from 'lucide-react'
-import { useLocale, useTranslations } from 'next-intl'
 import { getImageData, usePresignedUpload } from 'next-s3-upload'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { PropsWithChildren, ReactNode, useState } from 'react'
 import { useCurrentGroup } from '../current-group-context'
+import { getVars } from '@/vars/getVars'
 
 const MAX_FILE_SIZE = 5 * 1024 ** 2
 
 export function CreateFromReceiptButton() {
-  const t = useTranslations('CreateFromReceipt')
+  const t = (key: string, params?: Record<string, string | number>) => getVars(`CreateFromReceipt.${key}`, params);
   const isDesktop = useMediaQuery('(min-width: 640px)')
 
   const DialogOrDrawer = isDesktop
@@ -77,8 +77,7 @@ function ReceiptDialogContent() {
   const { data: categoriesData } = trpc.categories.list.useQuery()
   const categories = categoriesData?.categories
 
-  const locale = useLocale()
-  const t = useTranslations('CreateFromReceipt')
+  const t = (key: string, params?: Record<string, string | number>) => getVars(`CreateFromReceipt.${key}`, params);
   const [pending, setPending] = useState(false)
   const { uploadToS3, FileInput, openFileDialog } = usePresignedUpload()
   const { toast } = useToast()
@@ -93,8 +92,8 @@ function ReceiptDialogContent() {
       toast({
         title: t('TooBigToast.title'),
         description: t('TooBigToast.description', {
-          maxSize: formatFileSize(MAX_FILE_SIZE, locale),
-          size: formatFileSize(file.size, locale),
+          maxSize: formatFileSize(MAX_FILE_SIZE),
+          size: formatFileSize(file.size),
         }),
         variant: 'destructive',
       })
@@ -204,7 +203,6 @@ function ReceiptDialogContent() {
                     {formatCurrency(
                       group.currency,
                       receiptInfo.amount,
-                      locale,
                       true,
                     )}
                   </>
@@ -223,7 +221,6 @@ function ReceiptDialogContent() {
                 receiptInfo.date ? (
                   formatDate(
                     new Date(`${receiptInfo?.date}T12:00:00.000Z`),
-                    locale,
                     { dateStyle: 'medium' },
                   )
                 ) : (
@@ -263,7 +260,7 @@ function ReceiptDialogContent() {
 }
 
 function Unknown() {
-  const t = useTranslations('CreateFromReceipt')
+  const t = (key: string, params?: Record<string, string | number>) => getVars(`CreateFromReceipt.${key}`, params);
   return (
     <div className="flex gap-1 items-center text-muted-foreground">
       <FileQuestion className="w-4 h-4" />

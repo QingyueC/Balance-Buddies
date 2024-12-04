@@ -1,7 +1,3 @@
-import createNextIntlPlugin from 'next-intl/plugin'
-
-const withNextIntl = createNextIntlPlugin()
-
 /**
  * Undefined entries are not supported. Push optional patterns to this array only if defined.
  * @type {import('next/dist/shared/lib/image-config').RemotePattern}
@@ -35,4 +31,4 @@ const nextConfig = {
 },
 }
 
-export default withNextIntl(nextConfig)
+export default nextConfig
