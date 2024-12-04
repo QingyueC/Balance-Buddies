@@ -5,7 +5,6 @@ import { getGroupExpenses } from '@/lib/api';
 import { cn, formatCurrency, formatDate } from '@/lib/utils';
 import { getVars } from '@/vars/getVars';
 import { Calendar } from 'lucide-react'; // Importing the Calendar icon
-import { useLocale} from 'next-intl';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import { Fragment } from 'react';
@@ -67,7 +66,6 @@ type Props = {
 
 export function ExpenseCard({ expense, currency, groupId }: Props) {
   const router = useRouter();
-  const locale = useLocale();
 
   return (
     <div
@@ -109,12 +107,12 @@ export function ExpenseCard({ expense, currency, groupId }: Props) {
             expense.isReimbursement && 'italic',
           )}
         >
-          {formatCurrency(currency, expense.amount, locale)}
+          {formatCurrency(currency, expense.amount)}
         </div>
         <div className="flex items-center text-xs text-muted-foreground gap-1">
           <Calendar className="w-4 h-4 text-muted-foreground" />
           <span>
-            {formatDate(expense.expenseDate, locale, { dateStyle: 'medium' })}
+            {formatDate(expense.expenseDate, { dateStyle: 'medium' })}
           </span>
         </div>
       </div>

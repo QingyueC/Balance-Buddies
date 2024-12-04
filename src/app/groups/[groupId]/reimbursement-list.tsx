@@ -2,7 +2,6 @@ import { Button } from '@/components/ui/button'
 import { Reimbursement } from '@/lib/balances'
 import { formatCurrency } from '@/lib/utils'
 import { Participant } from '@prisma/client'
-import { useLocale} from 'next-intl'
 import Link from 'next/link'
 import { getVars } from '@/vars/getVars'
 
@@ -20,7 +19,6 @@ export function ReimbursementList({
   currency,
   groupId,
 }: Props) {
-  const locale = useLocale()
   const t = (key: string, params?: Record<string, string | number>) =>
     getVars(`Balances.Reimbursements.${key}`, params)
 
@@ -87,7 +85,7 @@ export function ReimbursementList({
                     </Button>
                   </div>
                   <div>
-                    {formatCurrency(currency, reimbursement.amount, locale)}
+                    {formatCurrency(currency, reimbursement.amount)}
                   </div>
                 </div>
               )

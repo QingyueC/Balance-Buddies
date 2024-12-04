@@ -13,7 +13,6 @@ import { AppRouterOutput } from '@/trpc/routers/_app'
 import { getVars } from '@/vars/getVars'
 import { StarFilledIcon} from '@radix-ui/react-icons'
 import { Calendar, Star, Users, MoreHorizontal, Trash, Archive, } from 'lucide-react'
-import { useLocale} from 'next-intl'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
@@ -31,7 +30,6 @@ export function RecentGroupListCard({
   refreshGroupsFromStorage: () => void
 }) {
   const router = useRouter()
-  const locale = useLocale()
   const toast = useToast()
   const t = (key: string, params?: Record<string, string | number>) => getVars(`Groups.${key}`, params);
 
@@ -134,7 +132,7 @@ export function RecentGroupListCard({
               <div className="flex items-center gap-1">
                 <Calendar className="w-4 h-4" />
                 <span>
-                  {new Date(groupDetail.createdAt).toLocaleDateString(locale, {
+                  {new Date(groupDetail.createdAt).toLocaleDateString(undefined, {
                     dateStyle: 'medium',
                   })}
                 </span>
