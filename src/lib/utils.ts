@@ -35,13 +35,14 @@ export function formatCategoryForAIPrompt(category: Category) {
 export function formatCurrency(
   currency: string,
   amount: number,
-  fractions?: boolean,
+  fractions: boolean = false,
+  locale: string = 'en-US'
 ) {
-  const format = new Intl.NumberFormat('en-US', {
+  const format = new Intl.NumberFormat(locale, {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
     style: 'currency',
-    // '€' will be placed in correct position
+    // '€' will be placed in the correct position
     currency: 'EUR',
   })
   const formattedAmount = format.format(fractions ? amount : amount / 100)

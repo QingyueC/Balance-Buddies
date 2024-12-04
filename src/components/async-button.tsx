@@ -1,4 +1,3 @@
-'use client'
 import { Button, ButtonProps } from '@/components/ui/button'
 import { Loader2 } from 'lucide-react'
 import { ReactNode, useState } from 'react'
@@ -27,11 +26,16 @@ export function AsyncButton({
           setLoading(false)
         }
       }}
+      disabled={loading} // Add this line
       {...props}
     >
       {loading ? (
         <>
-          <Loader2 className="w-4 h-4 mr-2 animate-spin" />{' '}
+          <Loader2
+            className="w-4 h-4 mr-2 animate-spin"
+            aria-label="Loading"
+            role="img"
+          />
           {loadingContent ?? children}
         </>
       ) : (

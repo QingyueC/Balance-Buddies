@@ -208,6 +208,7 @@ export function GroupForm({
                               <Button
                                 variant="ghost"
                                 className="text-destructive"
+                                aria-label="trash"
                                 onClick={() => remove(index)}
                                 type="button"
                                 size="icon"
@@ -237,6 +238,7 @@ export function GroupForm({
             </Button>
           </CardFooter>
         </Card>
+
 
         <div className="flex mt-4 gap-2">
           <SubmitButton

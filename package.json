@@ -59,6 +59,7 @@
     "react-hook-form": "^7.47.0",
     "react-intersection-observer": "^9.8.0",
     "server-only": "^0.0.1",
+    "shadcn": "^2.1.6",
     "sharp": "^0.33.2",
     "superjson": "^2.2.1",
     "tailwind-merge": "^1.14.0",
@@ -71,16 +72,17 @@
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.0",
-    "@testing-library/jest-dom": "^6.4.8",
-    "@testing-library/react": "^16.0.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.0.1",
+    "@testing-library/user-event": "^14.5.2",
     "@total-typescript/ts-reset": "^0.5.1",
     "@types/content-disposition": "^0.5.8",
-    "@types/jest": "^29.5.12",
+    "@types/jest": "^29.5.14",
     "@types/negotiator": "^0.6.3",
     "@types/node": "^20",
     "@types/pg": "^8.10.9",
-    "@types/react": "^18.2.48",
-    "@types/react-dom": "^18.2.18",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
     "@types/uuid": "^9.0.6",
     "autoprefixer": "^10",
     "dotenv": "^16.3.1",
@@ -92,8 +94,9 @@
     "prettier": "^3.0.3",
     "prettier-plugin-organize-imports": "^3.2.3",
     "tailwindcss": "^3",
+    "ts-jest": "^29.2.5",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.3.3"
+    "typescript": "^5.7.2"
   }
 }
