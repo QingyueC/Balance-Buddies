@@ -39,13 +39,13 @@ import {
 import { AppRouterOutput } from '@/trpc/routers/_app'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Save } from 'lucide-react'
-import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { DeletePopup } from '../../../../components/delete-popup'
 import { extractCategoryFromTitle } from '../../../../components/expense-form-actions'
+import { getVars } from '@/vars/getVars'
 
 const enforceCurrencyPattern = (value: string) =>
   value
@@ -143,7 +143,7 @@ export function ExpenseForm({
   onDelete?: (participantId?: string) => Promise<void>
   runtimeFeatureFlags: RuntimeFeatureFlags
 }) {
-  const t = useTranslations('ExpenseForm')
+  const t = (key: string, params?: Record<string, string | number>) => getVars(`ExpenseForm.${key}`, params);
   const isCreate = expense === undefined
   const searchParams = useSearchParams()
 

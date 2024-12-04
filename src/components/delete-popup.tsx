@@ -1,5 +1,4 @@
 import { Trash2 } from 'lucide-react'
-import { useTranslations } from 'next-intl'
 import { AsyncButton } from './async-button'
 import { Button } from './ui/button'
 import {
@@ -11,9 +10,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from './ui/dialog'
+import { getVars } from '@/vars/getVars'
 
 export function DeletePopup({ onDelete }: { onDelete: () => Promise<void> }) {
-  const t = useTranslations('ExpenseForm.DeletePopup')
+  const t = (key: string, params?: Record<string, string | number>) => getVars(`ExpenseForm.DeletePopup.${key}`, params);
   return (
     <Dialog>
       <DialogTrigger asChild>

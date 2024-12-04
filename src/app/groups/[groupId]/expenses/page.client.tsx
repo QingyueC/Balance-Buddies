@@ -13,9 +13,9 @@ import {
 } from '@/components/ui/card';
 import { Download, Plus } from 'lucide-react';
 import { Metadata } from 'next';
-import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useCurrentGroup } from '../current-group-context';
+import { getVars } from '@/vars/getVars';
 
 export const revalidate = 3600;
 
@@ -28,7 +28,7 @@ export default function GroupExpensesPageClient({
 }: {
   enableReceiptExtract: boolean;
 }) {
-  const t = useTranslations('Expenses');
+  const t = (key: string, params?: Record<string, string | number>) => getVars(`Expenses.${key}`, params);
   const { groupId } = useCurrentGroup();
 
   return (

@@ -27,11 +27,11 @@ import { getGroup } from '@/lib/api'
 import { GroupFormValues, groupFormSchema } from '@/lib/schemas'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Save, Trash2 } from 'lucide-react'
-import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { Textarea } from './ui/textarea'
+import { getVars } from '../vars/getVars'
 
 export type Props = {
   group?: NonNullable<Awaited<ReturnType<typeof getGroup>>>
@@ -47,7 +47,7 @@ export function GroupForm({
   onSubmit,
   protectedParticipantIds = [],
 }: Props) {
-  const t = useTranslations('GroupForm')
+  const t = (key: string, params?: Record<string, string | number>) => getVars(`GroupForm.${key}`, params);
   const form = useForm<GroupFormValues>({
     resolver: zodResolver(groupFormSchema),
     defaultValues: group
@@ -135,28 +135,6 @@ export function GroupForm({
                 </FormItem>
               )}
             />
-
-            {/* <FormField
-              control={form.control}
-              name="currency"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('CurrencyField.label')}</FormLabel>
-                  <FormControl>
-                    <Input
-                      className="text-base"
-                      placeholder={t('CurrencyField.placeholder')}
-                      max={5}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription>
-                    {t('CurrencyField.description')}
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            /> */}
 
             <div className="col-span-2">
               <FormField
@@ -259,53 +237,6 @@ export function GroupForm({
             </Button>
           </CardFooter>
         </Card>
-
-        {/* <Card className="mb-4">
-          <CardHeader>
-            <CardTitle>{t('Settings.title')}</CardTitle>
-            <CardDescription>{t('Settings.description')}</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="grid sm:grid-cols-2 gap-4">
-              {activeUser !== null && (
-                <FormItem>
-                  <FormLabel>{t('Settings.ActiveUserField.label')}</FormLabel>
-                  <FormControl>
-                    <Select
-                      onValueChange={(value) => {
-                        setActiveUser(value)
-                      }}
-                      defaultValue={activeUser}
-                    >
-                      <SelectTrigger>
-                        <SelectValue
-                          placeholder={t(
-                            'Settings.ActiveUserField.placeholder',
-                          )}
-                        />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {[
-                          { name: t('Settings.ActiveUserField.none') },
-                          ...form.watch('participants'),
-                        ]
-                          .filter((item) => item.name.length > 0)
-                          .map(({ name }) => (
-                            <SelectItem key={name} value={name}>
-                              {name}
-                            </SelectItem>
-                          ))}
-                      </SelectContent>
-                    </Select>
-                  </FormControl>
-                  <FormDescription>
-                    {t('Settings.ActiveUserField.description')}
-                  </FormDescription>
-                </FormItem>
-              )}
-            </div>
-          </CardContent>
-        </Card> */}
 
         <div className="flex mt-4 gap-2">
           <SubmitButton

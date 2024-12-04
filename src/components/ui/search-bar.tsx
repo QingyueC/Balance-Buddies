@@ -2,8 +2,8 @@ import * as React from 'react'
 
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
-import { useTranslations } from 'next-intl'
 import { Search, XCircle } from 'lucide-react'
+import { getVars } from '@/vars/getVars'
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -12,7 +12,7 @@ export interface InputProps
 
 const SearchBar = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, onValueChange, ...props }, ref) => {
-    const t = useTranslations('Expenses')
+    const t = (key: string, params?: Record<string, string | number>) => getVars(`Expenses.${key}`, params);
     const [value, _setValue] = React.useState('')
 
     const setValue = (v: string) => {
