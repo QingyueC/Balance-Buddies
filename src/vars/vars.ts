@@ -297,7 +297,6 @@ const vars =
   },
   "Locale": {
     "en-US": "English",
-    "zh-CN": "Chinese (Simplified)"
   },
   "Share": {
     "title": "Share",

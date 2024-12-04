@@ -8,8 +8,8 @@ import { Toaster } from '@/components/ui/toaster'
 import { env } from '@/lib/env'
 import { TRPCProvider } from '@/trpc/client'
 import type { Metadata, Viewport } from 'next'
-import { NextIntlClientProvider } from 'next-intl'
-import { getLocale, getMessages } from 'next-intl/server'
+// import { NextIntlClientProvider } from 'next-intl'
+// import { getLocale, getMessages } from 'next-intl/server'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Suspense } from 'react'
@@ -142,13 +142,12 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const locale = await getLocale()
-  const messages = await getMessages()
+  // const locale = await getLocale()
+  // const messages = await getMessages()
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html  suppressHydrationWarning>
       <ApplePwaSplash icon="/logo-with-text.png" color="#78B3CE" />
       <body className="pt-16 min-h-[100dvh] flex flex-col items-stretch bg-slate-50 bg-opacity-30 dark:bg-background">
-        <NextIntlClientProvider messages={messages}>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -160,7 +159,6 @@ export default async function RootLayout({
             </Suspense>
             <Content>{children}</Content>
           </ThemeProvider>
-        </NextIntlClientProvider>
       </body>
     </html>
   )

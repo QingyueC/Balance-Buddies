@@ -12,7 +12,7 @@ import {
 
 import { cn } from "@/lib/utils"
 import { Label } from "@/components/ui/label"
-import { useMessages } from "next-intl"
+// import { useMessages } from "next-intl"
 
 const Form = FormProvider
 
@@ -145,18 +145,8 @@ const FormMessage = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, children, ...props }, ref) => {
-  const messages = useMessages()
   const { error, formMessageId } = useFormField()
-  let body
-  if (error) {
-    body = String(error?.message)
-    const translation = (messages.SchemaErrors as any)[body]
-    if (translation) {
-      body = translation
-    }
-  } else {
-    body = children
-  }
+  const body = error ? String(error?.message) : children
 
   if (!body) {
     return null
