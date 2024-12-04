@@ -22,11 +22,11 @@ import { useMediaQuery } from '@/lib/hooks'
 import { cn } from '@/lib/utils'
 import { trpc } from '@/trpc/client'
 import { AppRouterOutput } from '@/trpc/routers/_app'
-import { useTranslations } from 'next-intl'
+import { getVars } from '@/vars/getVars'
 import { ComponentProps, useEffect, useState } from 'react'
 
 export function ActiveUserModal({ groupId }: { groupId: string }) {
-  const t = useTranslations('Expenses.ActiveUserModal')
+  const t = (key: string, params?: Record<string, string | number>) => getVars(`Expenses.ActiveUserModal.${key}`, params);
   const [open, setOpen] = useState(false)
   const isDesktop = useMediaQuery('(min-width: 768px)')
   const { data: groupData } = trpc.groups.get.useQuery({ groupId })
@@ -101,7 +101,7 @@ function ActiveUserForm({
   group?: AppRouterOutput['groups']['get']['group']
   close: () => void
 }) {
-  const t = useTranslations('Expenses.ActiveUserModal')
+  const t = (key: string, params?: Record<string, string | number>) => getVars(`Expenses.ActiveUserModal.${key}`, params);
   const [selected, setSelected] = useState('None')
 
   return (

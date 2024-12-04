@@ -11,10 +11,10 @@ import { getGroups } from '@/lib/api'
 import { trpc } from '@/trpc/client'
 import { AppRouterOutput } from '@/trpc/routers/_app'
 import { Loader2 } from 'lucide-react'
-import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { PropsWithChildren, useEffect, useState } from 'react'
 import { RecentGroupListCard } from './recent-group-list-card'
+import { getVars } from '@/vars/getVars'
 
 export type RecentGroupsState =
   | { status: 'pending' }
@@ -102,7 +102,7 @@ function RecentGroupList_({
   archivedGroups: string[]
   refreshGroupsFromStorage: () => void
 }) {
-  const t = useTranslations('Groups')
+  const t = (key: string, params?: Record<string, string | number>) => getVars(`Groups.${key}`, params);
   const { data, isLoading } = trpc.groups.list.useQuery({
     groupIds: groups.map((group) => group.id),
   })
@@ -225,7 +225,7 @@ function GroupsPage({
   children,
   reload,
 }: PropsWithChildren<{ reload: () => void }>) {
-  const t = useTranslations('Groups')
+  const t = (key: string, params?: Record<string, string | number>) => getVars(`Groups.${key}`, params);
   return (
     <div className="flex flex-col items-start gap-4 mt-12">
       <h1 className="font-extrabold text-2xl text-left">

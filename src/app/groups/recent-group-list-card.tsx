@@ -10,9 +10,10 @@ import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useToast } from '@/components/ui/use-toast'
 import { AppRouterOutput } from '@/trpc/routers/_app'
+import { getVars } from '@/vars/getVars'
 import { StarFilledIcon} from '@radix-ui/react-icons'
 import { Calendar, Star, Users, MoreHorizontal, Trash, Archive, } from 'lucide-react'
-import { useLocale, useTranslations } from 'next-intl'
+import { useLocale} from 'next-intl'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
@@ -32,7 +33,7 @@ export function RecentGroupListCard({
   const router = useRouter()
   const locale = useLocale()
   const toast = useToast()
-  const t = useTranslations('Groups')
+  const t = (key: string, params?: Record<string, string | number>) => getVars(`Groups.${key}`, params);
 
   return (
     <li

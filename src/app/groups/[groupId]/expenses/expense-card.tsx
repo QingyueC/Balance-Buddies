@@ -3,15 +3,21 @@ import { ActiveUserBalance } from '@/app/groups/[groupId]/expenses/active-user-b
 import { CategoryIcon } from '@/app/groups/[groupId]/expenses/category-icon';
 import { getGroupExpenses } from '@/lib/api';
 import { cn, formatCurrency, formatDate } from '@/lib/utils';
+import { getVars } from '@/vars/getVars';
 import { Calendar } from 'lucide-react'; // Importing the Calendar icon
-import { useLocale, useTranslations } from 'next-intl';
+import { useLocale} from 'next-intl';
 import { useRouter } from 'next/navigation';
+import React from 'react';
 import { Fragment } from 'react';
 
 type Expense = Awaited<ReturnType<typeof getGroupExpenses>>[number];
 
+
+
+
 function Participants({ expense }: { expense: Expense }) {
-  const t = useTranslations('ExpenseCard');
+  // const t = useTranslations('ExpenseCard');
+  const t = (key: string, params?: Record<string, string | number>) => getVars(`ExpenseCard.${key}`, params);
   const key = expense.amount > 0 ? 'paidBy' : 'receivedBy';
   const paidFor = expense.paidFor.map((paidFor, index) => (
     <Fragment key={index}>
@@ -19,11 +25,36 @@ function Participants({ expense }: { expense: Expense }) {
       <strong>{paidFor.participant.name}</strong>
     </Fragment>
   ));
-  const participants = t.rich(key, {
-    strong: (chunks) => <strong>{chunks}</strong>,
-    paidBy: expense.paidBy.name,
-    paidFor: () => paidFor,
-    forCount: expense.paidFor.length,
+  // const participants = t.rich(key, {
+  //   strong: (chunks) => <strong>{chunks}</strong>,
+  //   paidBy: expense.paidBy.name,
+  //   paidFor: () => paidFor,
+  //   forCount: expense.paidFor.length,
+  // });
+  const rawTranslation = t(key);
+  const participants = rawTranslation.split(/({[^}]+})/g).map((chunk, index) => {
+    if (chunk.startsWith('{') && chunk.endsWith('}')) {
+      const placeholder = chunk.slice(1, -1); // Extract placeholder key (e.g., "strong")
+      if (placeholder === 'strong') {
+        return <strong key={index}>participants</strong>;
+      } else if (placeholder === 'paidBy') {
+        return <span key={index}>{expense.paidBy.name}</span>;
+      } else if (placeholder === 'paidFor') {
+        return (
+          <span key={index}>
+            {paidFor.map((person, i) => (
+              <span key={i}>
+                {person}
+                {i < paidFor.length - 1 ? ', ' : ''}
+              </span>
+            ))}
+          </span>
+        );
+      } else if (placeholder === 'forCount') {
+        return <span key={index}>{expense.paidFor.length}</span>;
+      }
+    }
+    return <span key={index}>{chunk}</span>; // Render static text
   });
   return <>{participants}</>;
 }

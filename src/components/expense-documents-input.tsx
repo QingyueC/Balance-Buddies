@@ -18,8 +18,9 @@ import { useToast } from '@/components/ui/use-toast'
 import { randomId } from '@/lib/api'
 import { ExpenseFormValues } from '@/lib/schemas'
 import { formatFileSize } from '@/lib/utils'
+import { getVars } from '@/vars/getVars'
 import { Loader2, Plus, Trash, X } from 'lucide-react'
-import { useLocale, useTranslations } from 'next-intl'
+import { useLocale } from 'next-intl'
 import { getImageData, usePresignedUpload } from 'next-s3-upload'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
@@ -33,7 +34,7 @@ const MAX_FILE_SIZE = 5 * 1024 ** 2
 
 export function ExpenseDocumentsInput({ documents, updateDocuments }: Props) {
   const locale = useLocale()
-  const t = useTranslations('ExpenseDocumentsInput')
+  const t = (key: string, params?: Record<string, string | number>) => getVars(`ExpenseDocumentsInput.${key}`, params);
   const [pending, setPending] = useState(false)
   const { FileInput, openFileDialog, uploadToS3 } = usePresignedUpload() // use presigned uploads to addtionally support providers other than AWS
   const { toast } = useToast()
