@@ -28,7 +28,11 @@ export function CopyButton({ text }: Props) {
         setCopied(true)
       }}
     >
-      {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+      {copied ? (
+        <Check className="w-4 h-4" aria-label="Check" role="img" />
+      ) : (
+        <Copy className="w-4 h-4" aria-label="Copy" role="img" />
+      )}
     </Button>
   )
 }
