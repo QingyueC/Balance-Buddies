@@ -19,12 +19,12 @@ export function DeletePopup({ onDelete }: { onDelete: () => Promise<void> }) {
       <DialogTrigger asChild>
         <Button variant="destructive">
           <Trash2 className="w-4 h-4 mr-2" />
-          {t('label')}
+          Delete
         </Button>
       </DialogTrigger>
       <DialogContent>
-        <DialogTitle>{t('title')}</DialogTitle>
-        <DialogDescription>{t('description')}</DialogDescription>
+        <DialogTitle>Are you sure you want to delete this expense?</DialogTitle>
+        <DialogDescription>Confirm if you’d like to proceed with deleting this expense. Please note that this action cannot be undone.</DialogDescription>
         <DialogFooter className="flex flex-col gap-2">
           <AsyncButton
             type="button"
@@ -32,10 +32,10 @@ export function DeletePopup({ onDelete }: { onDelete: () => Promise<void> }) {
             loadingContent="Deleting…"
             action={onDelete}
           >
-            {t('yes')}
+            Yes
           </AsyncButton>
           <DialogClose asChild>
-            <Button variant={'secondary'}>{t('cancel')}</Button>
+            <Button variant={'secondary'}>Cancel</Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>

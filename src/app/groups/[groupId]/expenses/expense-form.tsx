@@ -592,9 +592,9 @@ export function ExpenseForm({
         )}
 
         <div className="flex mt-4 gap-2">
-          <SubmitButton loadingContent={isCreate ? 'creating' : 'saving'}>
+          <SubmitButton loadingContent={isCreate ? 'Creating' : 'Saving'}>
             <Save className="w-4 h-4 mr-2" />
-            {isCreate ? 'create' : 'save'}
+            {isCreate ? 'Create' : 'Save'}
           </SubmitButton>
           {!isCreate && onDelete && (
             <DeletePopup
