@@ -4,7 +4,7 @@ import { useState } from "react";
 export default function Video() {
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const videoId = "KKar0Y47q_s"; // 替换为你的 YouTube 视频 ID
+  const videoId = "KKar0Y47q_s";
   const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
 
   return (
