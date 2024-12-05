@@ -71,7 +71,7 @@ export function AddGroupByUrlButton({ reload }: Props) {
               setError(false)
             }}
           />
-          <Button size="icon" type="submit" disabled={pending}>
+          <Button size="icon" type="submit" data-testid="submit-button" disabled={pending}>
             {pending ? (
               <Loader2 className="w-4 h-4 animate-spin" />
             ) : (
