@@ -13,7 +13,7 @@ export function SubmitButton({ children, loadingContent, ...props }: Props) {
     <Button type="submit" disabled={isSubmitting} {...props}>
       {isSubmitting ? (
         <>
-          <Loader2 className="w-4 h-4 mr-2 animate-spin" /> {loadingContent}
+          <Loader2 className="w-4 h-4 mr-2 animate-spin" data-testid='spinner-icon'/> {loadingContent}
         </>
       ) : (
         children
