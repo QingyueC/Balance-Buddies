@@ -14,7 +14,7 @@ if (process.env.S3_UPLOAD_ENDPOINT) {
 } else if (process.env.S3_UPLOAD_BUCKET && process.env.S3_UPLOAD_REGION) {
   // default provider
   remotePatterns.push({
-    hostname: `${process.env.S3_UPLOAD_BUCKET}.s3.${process.env.S3_UPLOAD_REGION}.amazonaws.com`,
+    hostname: `balancebuddiesbucket.s3.us-east-2.amazonaws.com`,
   })
 }
 

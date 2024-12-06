@@ -44,7 +44,6 @@ import { useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { DeletePopup } from '../../../../components/delete-popup'
-import { extractCategoryFromTitle } from '../../../../components/expense-form-actions'
 import { getVars } from '@/vars/getVars'
 
 const enforceCurrencyPattern = (value: string) =>
@@ -164,7 +163,7 @@ export function ExpenseForm({
         title: expense.title,
         expenseDate: expense.expenseDate ?? new Date(),
         amount: String(expense.amount / 100) as unknown as number, // hack
-        category: expense.categoryId,
+        category: 0,
         paidBy: expense.paidById,
         paidFor: expense.paidFor.map(({ participantId, shares }) => ({
           participant: participantId,
@@ -205,9 +204,7 @@ export function ExpenseForm({
             ? new Date(searchParams.get('date') as string)
             : new Date(),
           amount: (searchParams.get('amount') || 0) as unknown as number, // hack,
-          category: searchParams.get('categoryId')
-            ? Number(searchParams.get('categoryId'))
-            : 0, // category with Id 0 is General
+          category: 0, // category with Id 0 is General
           // paid for all, split evenly
           paidFor: defaultSplittingOptions.paidFor,
           paidBy: getSelectedPayer(),
@@ -327,17 +324,7 @@ export function ExpenseForm({
                           placeholder="Lunch after Software Engineering class"
                           className="text-base"
                           {...field}
-                          onBlur={async () => {
-                            field.onBlur()
-                            if (runtimeFeatureFlags.enableCategoryExtract) {
-                              setCategoryLoading(true)
-                              const { categoryId } = await extractCategoryFromTitle(
-                                field.value,
-                              )
-                              form.setValue('category', categoryId)
-                              setCategoryLoading(false)
-                            }
-                          }}
+                          
                         />
                       </FormControl>
                       <FormMessage />
