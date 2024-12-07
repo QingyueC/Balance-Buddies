@@ -28,7 +28,7 @@ import { useToast } from '@/components/ui/use-toast'
 import { useMediaQuery } from '@/lib/hooks'
 import { formatCurrency, formatDate, formatFileSize } from '@/lib/utils'
 import { trpc } from '@/trpc/client'
-import { ChevronRight, FileQuestion, Loader2, Receipt } from 'lucide-react'
+import { ChevronRight, FileQuestion, Loader2, Plus, Receipt } from 'lucide-react'
 import { getImageData, usePresignedUpload } from 'next-s3-upload'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -56,7 +56,7 @@ export function CreateFromReceiptButton() {
                   title={t('Dialog.triggerTitle')}
 
               >
-                <Receipt className="w-5 h-5 " />
+                <Plus className="w-4 h-4" />
                 <span>Import From Image</span>
               </Button>
             }
@@ -134,11 +134,6 @@ function ReceiptDialogContent() {
     }
     upload()
   }
-
-  const receiptInfoCategory =
-      (receiptInfo?.categoryId &&
-          categories?.find((c) => String(c.id) === receiptInfo.categoryId)) ||
-      null
 
   return (
       <div className="bg-white prose prose-sm dark:prose-invert">
