@@ -17,11 +17,18 @@ const STORAGE_KEY = 'recentGroups'
 const STARRED_GROUPS_STORAGE_KEY = 'starredGroups'
 const ARCHIVED_GROUPS_STORAGE_KEY = 'archivedGroups'
 
-export function getRecentGroups() {
+function safeJSONParse(str: string | null) {
+  if (!str) return null;
+  try {
+    return JSON.parse(str);
+  } catch {
+    return null;
+  }
+}
+
+export function getRecentGroups(): RecentGroup[] {
   const groupsInStorageJson = localStorage.getItem(STORAGE_KEY)
-  const groupsInStorageRaw = groupsInStorageJson
-    ? JSON.parse(groupsInStorageJson)
-    : []
+  const groupsInStorageRaw = safeJSONParse(groupsInStorageJson) ?? []
   const parseResult = recentGroupsSchema.safeParse(groupsInStorageRaw)
   return parseResult.success ? parseResult.data : []
 }
@@ -42,21 +49,21 @@ export function deleteRecentGroup(group: RecentGroup) {
   )
 }
 
-export function getStarredGroups() {
+export function getStarredGroups(): string[] {
   const starredGroupsJson = localStorage.getItem(STARRED_GROUPS_STORAGE_KEY)
-  const starredGroupsRaw = starredGroupsJson
-    ? JSON.parse(starredGroupsJson)
-    : []
+  const starredGroupsRaw = safeJSONParse(starredGroupsJson) ?? []
   const parseResult = starredGroupsSchema.safeParse(starredGroupsRaw)
   return parseResult.success ? parseResult.data : []
 }
 
 export function starGroup(groupId: string) {
   const starredGroups = getStarredGroups()
-  localStorage.setItem(
-    STARRED_GROUPS_STORAGE_KEY,
-    JSON.stringify([...starredGroups, groupId]),
-  )
+  if (!starredGroups.includes(groupId)) {
+    localStorage.setItem(
+      STARRED_GROUPS_STORAGE_KEY,
+      JSON.stringify([...starredGroups, groupId])
+    )
+  }
 }
 
 export function unstarGroup(groupId: string) {
@@ -67,21 +74,21 @@ export function unstarGroup(groupId: string) {
   )
 }
 
-export function getArchivedGroups() {
+export function getArchivedGroups(): string[] {
   const archivedGroupsJson = localStorage.getItem(ARCHIVED_GROUPS_STORAGE_KEY)
-  const archivedGroupsRaw = archivedGroupsJson
-    ? JSON.parse(archivedGroupsJson)
-    : []
+  const archivedGroupsRaw = safeJSONParse(archivedGroupsJson) ?? []
   const parseResult = archivedGroupsSchema.safeParse(archivedGroupsRaw)
   return parseResult.success ? parseResult.data : []
 }
 
 export function archiveGroup(groupId: string) {
   const archivedGroups = getArchivedGroups()
-  localStorage.setItem(
-    ARCHIVED_GROUPS_STORAGE_KEY,
-    JSON.stringify([...archivedGroups, groupId]),
-  )
+  if (!archivedGroups.includes(groupId)) {
+    localStorage.setItem(
+      ARCHIVED_GROUPS_STORAGE_KEY,
+      JSON.stringify([...archivedGroups, groupId])
+    )
+  }
 }
 
 export function unarchiveGroup(groupId: string) {
