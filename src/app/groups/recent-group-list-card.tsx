@@ -65,6 +65,7 @@ export function RecentGroupListCard({
             <Button
               size="icon"
               variant="ghost"
+              data-testid="star-button"
               onClick={(event) => {
                 event.stopPropagation()
                 if (isStarred) {
@@ -87,6 +88,7 @@ export function RecentGroupListCard({
             <Button
               size="icon"
               variant="ghost"
+              data-testid="archive-button"
               onClick={(event) => {
                 event.stopPropagation()
                 if (isArchived) {
@@ -109,6 +111,7 @@ export function RecentGroupListCard({
             <Button
               size="icon"
               variant="ghost"
+              data-testid="delete-button"
               onClick={(event) => {
                 event.stopPropagation()
                 deleteRecentGroup(group)

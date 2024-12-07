@@ -58,7 +58,7 @@ export function ExpenseDocumentsInput({ documents, updateDocuments }: Props) {
         const { url } = await uploadToS3(file)
         updateDocuments([...documents, { id: randomId(), url, width, height }])
       } catch (err) {
-        console.error(err)
+        // console.error(err)
         toast({
           title: t('ErrorToast.title'),
           description: t('ErrorToast.description'),
