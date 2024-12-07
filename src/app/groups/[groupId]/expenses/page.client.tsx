@@ -36,8 +36,8 @@ export default function GroupExpensesPageClient({
         <Card className="mb-4 rounded-none -mx-4 border-x-0 sm:border-x sm:rounded-lg sm:mx-0">
           <div className="flex flex-1">
             <CardHeader className="flex-1 p-4 sm:p-6">
-              <CardTitle>{('title')}</CardTitle>
-              <CardDescription>{('description')}</CardDescription>
+              <CardTitle>{t('title')}</CardTitle>
+              <CardDescription>{t('description')}</CardDescription>
             </CardHeader>
             <CardHeader className="p-4 sm:p-6 flex flex-row space-y-0 gap-2">
 

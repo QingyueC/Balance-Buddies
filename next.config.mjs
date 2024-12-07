@@ -21,6 +21,7 @@ if (process.env.S3_UPLOAD_ENDPOINT) {
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    domains: ['balancebuddiesbucket.s3.us-east-2.amazonaws.com'],
     remotePatterns
   },
   // Required to run in a codespace (see https://github.com/vercel/next.js/issues/58019)
