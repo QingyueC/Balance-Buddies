@@ -81,27 +81,27 @@ const vars =
         "title": "Group information",
         "NameField": {
           "label": "Group name",
-          "placeholder": "Summer vacations",
+          "placeholder": "Apt 1234",
           "description": "Enter a name for your group."
         },
         "InformationField": {
-          "label": "Group information",
-          "placeholder": "What information is relevant to group participants?"
+          "label": "Details",
+          "placeholder": "What detail is relevant to your buddies?"
         },
         "CurrencyField": {
           "label": "Currency symbol",
           "placeholder": "$, €, £…",
-          "description": "We’ll use it to display amounts."
+          "description": "What symbol do you want to use for the currency?"
         },
         "Participants": {
-          "title": "Participants",
-          "description": "Enter the name for each participant.",
-          "protectedParticipant": "This participant is part of expenses, and can not be removed.",
+          "title": "Buddies",
+          "description": "Enter the name for each buddy.",
+          "protectedParticipant": "This buddy is protected and cannot be removed.",
           "new": "New",
-          "add": "Add participant",
-          "John": "Aish",
-          "Jane": "Emma",
-          "Jack": "Chen"
+          "add": "Add buddy",
+          "John": "Allen",
+          "Jane": "Hank",
+          "Jack": "Emma"
         },
         "Settings": {
           "title": "Local settings",
