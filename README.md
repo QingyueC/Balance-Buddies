@@ -1,26 +1,9 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
-First create a .env file in the project folder and enter the following variables.
-
-```bash
-DB_HOST=localhost
-DB_PORT=5432
-DB_USER=<username>
-DB_PASSWORD=<password>
-DB_NAME=balanceBuddies
-POSTGRES_PRISMA_URL=postgresql://<username>:<password>@localhost:5432/balanceBuddies?schema=public
-POSTGRES_URL_NON_POOLING=postgresql://<username>:<password>@localhost:5432/balanceBuddies
-
-NEXT_PUBLIC_ENABLE_EXPENSE_DOCUMENTS=true
-S3_UPLOAD_KEY=AKIAW5BDQ3TDQDIKYBNB
-S3_UPLOAD_SECRET=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
-S3_UPLOAD_BUCKET=balancebuddiesbucket
-S3_UPLOAD_REGION=us-east-2
-OPENAI_API_KEY=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
-```
+First create a .env file in the project folder and copy the contents of .env.example into .env
 Make sure you have postgres installed in your system.
-Replace username and password with the local database credentials.
+Replace username and password with the local database credentials in the .env file.
 
 Next, install dependencies and database migrations.
 ```bash
