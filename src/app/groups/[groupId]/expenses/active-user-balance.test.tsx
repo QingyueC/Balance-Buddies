@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, within } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { ActiveUserBalance } from './active-user-balance';
+import { ActUserBal } from './active-user-balance';
 import { useActiveUser } from '@/lib/hooks';
 import { getBalances } from '@/lib/balances';
 import { Money } from '@/components/money';
@@ -30,7 +30,7 @@ jest.mock('@/vars/getVars', () => ({
 // Define `Expense` type using the expected type from your codebase
 type Expense = Parameters<typeof getBalances>[0][number];
 
-describe('ActiveUserBalance Component', () => {
+describe('ActUserBal Component', () => {
   const mockExpense: Expense = {
     id: 'expense-1',
     amount: 100,
@@ -55,7 +55,7 @@ describe('ActiveUserBalance Component', () => {
     (useActiveUser as jest.Mock).mockReturnValueOnce(null);
 
     render(
-      <ActiveUserBalance groupId="group-1" currency="USD" expense={mockExpense} />
+      <ActUserBal groupId="group-1" currency="USD" expense={mockExpense} />
     );
 
     expect(screen.queryByText(/Your Balance:/)).not.toBeInTheDocument();
@@ -66,7 +66,7 @@ describe('ActiveUserBalance Component', () => {
     (getBalances as jest.Mock).mockReturnValueOnce({});
 
     render(
-      <ActiveUserBalance groupId="group-1" currency="USD" expense={mockExpense} />
+      <ActUserBal groupId="group-1" currency="USD" expense={mockExpense} />
     );
 
     expect(screen.getByText('You are not involved')).toBeInTheDocument();
@@ -83,7 +83,7 @@ describe('ActiveUserBalance Component', () => {
     });
   
     render(
-      <ActiveUserBalance groupId="group-1" currency="USD" expense={mockExpense} />
+      <ActUserBal groupId="group-1" currency="USD" expense={mockExpense} />
     );
   
     const container = screen.getByText(/Your Balance:/).closest('div');
@@ -106,7 +106,7 @@ describe('ActiveUserBalance Component', () => {
     });
 
     render(
-      <ActiveUserBalance groupId="group-1" currency="USD" expense={mockExpense} />
+      <ActUserBal groupId="group-1" currency="USD" expense={mockExpense} />
     );
 
     const container = screen.getByText(/Your Balance:/).closest('div');

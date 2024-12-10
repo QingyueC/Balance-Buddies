@@ -2,7 +2,7 @@ import { getGroups } from '@/lib/api'
 import { baseProcedure } from '@/trpc/init'
 import { z } from 'zod'
 
-export const listGroupsProcedure = baseProcedure
+export const listGrp = baseProcedure
   .input(
     z.object({
       groupIds: z.array(z.string().min(1)),

@@ -3,7 +3,7 @@ import { groupFormSchema } from '@/lib/schemas'
 import { baseProcedure } from '@/trpc/init'
 import { z } from 'zod'
 
-export const updateGroupProcedure = baseProcedure
+export const updateGrp = baseProcedure
   .input(
     z.object({
       groupId: z.string().min(1),

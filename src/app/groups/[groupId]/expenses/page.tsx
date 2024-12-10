@@ -1,4 +1,4 @@
-import GroupExpensesPageClient from '@/app/groups/[groupId]/expenses/page.client'
+import ExpGrpPC from '@/app/groups/[groupId]/expenses/page.client'
 import { env } from '@/lib/env'
 import { Metadata } from 'next'
 
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default async function GroupExpensesPage() {
   return (
-    <GroupExpensesPageClient
+    <ExpGrpPC
       enableReceiptExtract={env.NEXT_PUBLIC_ENABLE_RECEIPT_EXTRACT}
     />
   )

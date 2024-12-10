@@ -1,4 +1,4 @@
-// expense-list-fetch-action.test.ts
+
 import { getGroupExpensesAction } from './expense-list-fetch-action';
 import { getGroupExpenses } from '@/lib/api';
 

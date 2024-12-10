@@ -5,7 +5,6 @@ import { EditExpenseForm } from './edit-expense-form';
 import { trpc } from '@/trpc/client';
 import { useRouter } from 'next/navigation';
 
-// Mock dependencies
 jest.mock('next/navigation', () => ({
   useRouter: jest.fn(),
 }));

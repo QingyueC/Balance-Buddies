@@ -7,13 +7,13 @@ type GroupContext =
   | { isLoading: false; groupId: string; group: Group }
   | { isLoading: true; groupId: string; group: undefined }
 
-const CurrentGroupContext = createContext<GroupContext | null>(null)
+const ActiveGrpContext = createContext<GroupContext | null>(null)
 
 export const useCurrentGroup = () => {
-  const context = useContext(CurrentGroupContext)
+  const context = useContext(ActiveGrpContext)
   if (!context)
     throw new Error(
-      'Missing context. Should be called inside a CurrentGroupProvider.',
+      'Context is missing. Ensure this hook is used within an ActiveGroupProvider',
     )
   return context
 }
@@ -23,8 +23,8 @@ export const CurrentGroupProvider = ({
   ...props
 }: PropsWithChildren<GroupContext>) => {
   return (
-    <CurrentGroupContext.Provider value={props}>
+    <ActiveGrpContext.Provider value={props}>
       {children}
-    </CurrentGroupContext.Provider>
+    </ActiveGrpContext.Provider>
   )
 }

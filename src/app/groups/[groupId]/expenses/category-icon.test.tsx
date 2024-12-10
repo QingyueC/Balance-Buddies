@@ -4,7 +4,6 @@ import '@testing-library/jest-dom';
 import { CategoryIcon } from './category-icon';
 import { Banknote, FerrisWheel, Dices, Home } from 'lucide-react';
 
-// Mock `lucide-react` icons to test rendering
 jest.mock('lucide-react', () => ({
   Banknote: jest.fn(() => <span data-testid="icon-banknote" />),
   FerrisWheel: jest.fn(() => <span data-testid="icon-ferris-wheel" />),

@@ -10,6 +10,5 @@ export const POST = route.configure({
     return `document-${timestamp}-${random}${extension.toLowerCase()}`
   },
   endpoint: env.S3_UPLOAD_ENDPOINT,
-  // forcing path style is only necessary for providers other than AWS
   forcePathStyle: !!env.S3_UPLOAD_ENDPOINT,
 })

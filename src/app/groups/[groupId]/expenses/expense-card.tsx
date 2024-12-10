@@ -1,10 +1,10 @@
 'use client';
-import { ActiveUserBalance } from '@/app/groups/[groupId]/expenses/active-user-balance';
+import { ActUserBal } from '@/app/groups/[groupId]/expenses/active-user-balance';
 import { CategoryIcon } from '@/app/groups/[groupId]/expenses/category-icon';
 import { getGroupExpenses } from '@/lib/api';
 import { cn, formatCurrency, formatDate } from '@/lib/utils';
 import { getVars } from '@/vars/getVars';
-import { Calendar } from 'lucide-react'; // Importing the Calendar icon
+import { Calendar } from 'lucide-react'; 
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import { Fragment } from 'react';
@@ -74,7 +74,7 @@ export function ExpenseCard({ expense, currency, groupId }: Props) {
         router.push(`/groups/${groupId}/expenses/${expense.id}/edit`);
       }}
     >
-      {/* Left Section - Icon */}
+      {}
       <div className="flex items-center">
         <CategoryIcon
           category={expense.category}
@@ -82,7 +82,7 @@ export function ExpenseCard({ expense, currency, groupId }: Props) {
         />
       </div>
 
-      {/* Middle Section - Title, Participants, and Balance */}
+      {}
       <div className="flex flex-col text-sm">
         <div className={cn('font-medium', expense.isReimbursement && 'italic')}>
           {expense.title}
@@ -91,11 +91,11 @@ export function ExpenseCard({ expense, currency, groupId }: Props) {
           <Participants expense={expense} />
         </div>
         <div className="text-xs text-muted-foreground">
-          <ActiveUserBalance {...{ groupId, currency, expense }} />
+          <ActUserBal {...{ groupId, currency, expense }} />
         </div>
       </div>
 
-      {/* Right Section - Amount and Date with Calendar Icon */}
+      {}
       <div className="flex flex-col items-end text-right">
         <div
           className={cn(

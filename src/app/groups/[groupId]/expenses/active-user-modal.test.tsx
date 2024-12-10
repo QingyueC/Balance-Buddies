@@ -6,7 +6,6 @@ import { trpc } from '@/trpc/client';
 import { useMediaQuery } from '@/lib/hooks';
 import { getVars } from '@/vars/getVars';
 
-// Mock ResizeObserver
 beforeAll(() => {
   global.ResizeObserver = class ResizeObserver {
     constructor(callback: any) {}
@@ -37,7 +36,6 @@ jest.mock('@/vars/getVars', () => ({
 beforeEach(() => {
   jest.clearAllMocks();
 
-  // Mock localStorage
   const localStorageMock = (function () {
     let store: { [key: string]: string } = {};
 
@@ -61,7 +59,6 @@ beforeEach(() => {
     value: localStorageMock,
   });
 
-  // Mock translations
   (getVars as jest.Mock).mockImplementation((key: string) => {
     const translations: Record<string, string> = {
       'Expenses.ActiveUserModal.title': 'Select Active User',
@@ -88,11 +85,10 @@ test('opens modal when no active user is set', async () => {
   (trpc.groups.get.useQuery as jest.Mock).mockReturnValue({
     data: mockGroupData,
   });
-  (useMediaQuery as jest.Mock).mockReturnValue(true); // Simulate desktop
+  (useMediaQuery as jest.Mock).mockReturnValue(true); 
 
   render(<ActiveUserModal groupId="group-1" />);
 
-  // Wait for useEffect to run
   await waitFor(() => {
     expect(screen.getByText('Select Active User')).toBeInTheDocument();
   });
@@ -102,13 +98,12 @@ test('does not open modal when active user is already set', async () => {
   (trpc.groups.get.useQuery as jest.Mock).mockReturnValue({
     data: mockGroupData,
   });
-  (useMediaQuery as jest.Mock).mockReturnValue(true); // Simulate desktop
+  (useMediaQuery as jest.Mock).mockReturnValue(true); 
 
   localStorage.setItem('group-1-activeUser', 'user-1');
 
   render(<ActiveUserModal groupId="group-1" />);
 
-  // Ensure modal is not open
   expect(screen.queryByText('Select Active User')).not.toBeInTheDocument();
 });
 
@@ -116,27 +111,22 @@ test('selecting an active user updates localStorage and closes modal', async () 
   (trpc.groups.get.useQuery as jest.Mock).mockReturnValue({
     data: mockGroupData,
   });
-  (useMediaQuery as jest.Mock).mockReturnValue(true); // Simulate desktop
+  (useMediaQuery as jest.Mock).mockReturnValue(true); 
 
   render(<ActiveUserModal groupId="group-1" />);
 
-  // Wait for modal to open
   await waitFor(() => {
     expect(screen.getByText('Select Active User')).toBeInTheDocument();
   });
 
-  // Select a participant
   const aliceRadio = screen.getByLabelText('Alice');
   fireEvent.click(aliceRadio);
 
-  // Click the save button
   const saveButton = screen.getByText('Save');
   fireEvent.click(saveButton);
 
-  // Check that localStorage is updated
   expect(localStorage.getItem('group-1-activeUser')).toBe('user-1');
 
-  // Modal should be closed
   await waitFor(() => {
     expect(screen.queryByText('Select Active User')).not.toBeInTheDocument();
   });
@@ -146,15 +136,13 @@ test('renders drawer on mobile devices', async () => {
   (trpc.groups.get.useQuery as jest.Mock).mockReturnValue({
     data: mockGroupData,
   });
-  (useMediaQuery as jest.Mock).mockReturnValue(false); // Simulate mobile
+  (useMediaQuery as jest.Mock).mockReturnValue(false); 
 
   render(<ActiveUserModal groupId="group-1" />);
 
-  // Wait for drawer to open
   await waitFor(() => {
     expect(screen.getByText('Select Active User')).toBeInTheDocument();
   });
 
-  // Ensure that DrawerContent is rendered
   expect(screen.getByRole('dialog')).toBeInTheDocument();
 });

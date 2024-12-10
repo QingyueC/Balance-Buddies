@@ -42,15 +42,12 @@ describe('ReimbursementList', () => {
         />
       );
   
-      // Locate debtor sections using debtor names in context
       const aliceSection = within(screen.getByText('Alice').closest('.mb-6') as HTMLElement);
       const charlieSection = within(screen.getByText('Charlie', { selector: '.font-bold' }).closest('.mb-6') as HTMLElement);
   
-      // Assert that the sections exist
       expect(aliceSection.getByText('Alice')).toBeInTheDocument();
       expect(charlieSection.getByText('Charlie')).toBeInTheDocument();
   
-      // Assert the content within each section
       expect(aliceSection.getByText('Bob')).toBeInTheDocument();
       expect(aliceSection.getByText('$50.00')).toBeInTheDocument();
       expect(aliceSection.getByText('Charlie')).toBeInTheDocument();

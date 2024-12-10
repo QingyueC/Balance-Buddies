@@ -26,13 +26,11 @@ export function ReimbursementList({
     return <p className="text-sm pb-6">{t('noImbursements')}</p>
   }
 
-  // Create a mapping from participant IDs to participant data for easy lookup
   const participantsById = participants.reduce((acc, participant) => {
     acc[participant.id] = participant
     return acc
   }, {} as Record<string, Participant>)
 
-  // Group reimbursements by debtor (the person who owes money)
   const reimbursementsByDebtor = reimbursements.reduce((acc, reimbursement) => {
     const debtorId = reimbursement.from
     if (!acc[debtorId]) {
@@ -42,20 +40,17 @@ export function ReimbursementList({
     return acc
   }, {} as Record<string, Reimbursement[]>)
 
-  // Create an array of debtors with their reimbursements
   const debtors = Object.keys(reimbursementsByDebtor).map((debtorId) => ({
     id: debtorId,
     name: participantsById[debtorId]?.name || '',
     reimbursements: reimbursementsByDebtor[debtorId],
   }))
 
-  // Sort debtors alphabetically by name
   debtors.sort((a, b) => a.name.localeCompare(b.name))
 
   return (
     <div className="text-sm">
       {debtors.map((debtor) => {
-        // Sort reimbursements (creditors) alphabetically by name
         debtor.reimbursements.sort((a, b) => {
           const nameA = participantsById[a.to]?.name || ''
           const nameB = participantsById[b.to]?.name || ''

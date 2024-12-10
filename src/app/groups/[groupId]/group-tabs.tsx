@@ -7,19 +7,19 @@ type Props = {
   groupId: string
 }
 
-export function GroupTabs({ groupId }: Props) {
+export function GrpTab({ groupId }: Props) {
   const t = (key: string, params?: Record<string, string | number>) => getVars(`.${key}`, params);
-  const pathname = usePathname()
-  const value =
-    pathname.replace(/\/groups\/[^\/]+\/([^/]+).*/, '$1') || 'expenses'
-  const router = useRouter()
+  const path = usePathname()
+  const val =
+    path.replace(/\/groups\/[^\/]+\/([^/]+).*/, '$1') || 'expenses'
+  const r = useRouter()
 
   return (
     <Tabs
-      value={value}
+      value={val}
       className="[&>*]:border overflow-x-auto"
       onValueChange={(value) => {
-        router.push(`/groups/${groupId}/${value}`)
+        r.push(`/groups/${groupId}/${value}`)
       }}
     >
       <TabsList>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen, within } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { BalancesList } from './balances-list'
+import { ListBal } from './balances-list'
 
 jest.mock('@/lib/utils', () => ({
   formatCurrency: (currency: string, amount: number) =>
@@ -9,7 +9,7 @@ jest.mock('@/lib/utils', () => ({
   cn: (...classes: string[]) => classes.filter(Boolean).join(' '),
 }))
 
-describe('BalancesList', () => {
+describe('ListBal', () => {
   it('renders the balances for participants correctly', () => {
     const participants = [
       { id: '1', name: 'Charlie', groupId: 'g1' },
@@ -26,7 +26,7 @@ describe('BalancesList', () => {
     const currency = '$'
 
     render(
-      <BalancesList
+      <ListBal
         balances={balances}
         participants={participants}
         currency={currency}
@@ -36,7 +36,7 @@ describe('BalancesList', () => {
     const table = screen.getByRole('table')
 
     const rows = within(table).getAllByRole('row')
-    expect(rows).toHaveLength(participants.length + 1) // +1 for header
+    expect(rows).toHaveLength(participants.length + 1)
 
     const headerRow = rows[0]
     expect(within(headerRow).getByText('Participant')).toBeInTheDocument()
@@ -57,7 +57,7 @@ describe('BalancesList', () => {
       const participantId = participants.find(
         (p) => p.name === expectedOrder[index]
       )!.id
-      const balance = balances[participantId].total // Access is now type-safe
+      const balance = balances[participantId].total
       const formattedBalance = `${currency}${balance.toFixed(2)}`
 
       expect(balanceCell).toHaveTextContent(formattedBalance)

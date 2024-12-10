@@ -4,10 +4,9 @@ import '@testing-library/jest-dom';
 import { ExpenseCard } from './expense-card';
 import { useRouter } from 'next/navigation';
 import { CategoryIcon } from '@/app/groups/[groupId]/expenses/category-icon';
-import { ActiveUserBalance } from '@/app/groups/[groupId]/expenses/active-user-balance';
+import { ActUserBal } from '@/app/groups/[groupId]/expenses/active-user-balance';
 import { SplitMode } from '@prisma/client';
 
-// Mock dependencies
 jest.mock('next/navigation', () => ({
   useRouter: jest.fn(),
 }));
@@ -17,7 +16,7 @@ jest.mock('@/app/groups/[groupId]/expenses/category-icon', () => ({
 }));
 
 jest.mock('@/app/groups/[groupId]/expenses/active-user-balance', () => ({
-  ActiveUserBalance: jest.fn(() => <div data-testid="active-user-balance">Balance</div>),
+  ActUserBal: jest.fn(() => <div data-testid="active-user-balance">Balance</div>),
 }));
 
 jest.mock('@/lib/utils', () => {
@@ -77,7 +76,7 @@ describe('ExpenseCard Component', () => {
     expect(within(participantsContainer!).getByText('John Doe')).toBeInTheDocument();
     expect(within(participantsContainer!).getByText('Jane Doe')).toBeInTheDocument();
 
-    // Check ActiveUserBalance
+    // Check ActUserBal
     expect(screen.getByTestId('active-user-balance')).toBeInTheDocument();
 
     // Check formatted amount
@@ -108,10 +107,10 @@ describe('ExpenseCard Component', () => {
     expect(amount).toHaveClass('italic');
   });
 
-  it('passes the correct props to ActiveUserBalance', () => {
+  it('passes the correct props to ActUserBal', () => {
     render(<ExpenseCard expense={mockExpense} currency={mockCurrency} groupId={mockGroupId} />);
 
-    expect(ActiveUserBalance).toHaveBeenCalledWith(
+    expect(ActUserBal).toHaveBeenCalledWith(
       {
         groupId: mockGroupId,
         currency: mockCurrency,

@@ -9,7 +9,7 @@ type Props = {
   }
 }
 
-export async function generateMetadata({
+export async function metadataGen({
   params: { groupId },
 }: Props): Promise<Metadata> {
   const group = await cached.getGroup(groupId)

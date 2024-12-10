@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   title: 'Expenses',
 };
 
-export default function GroupExpensesPageClient({
+export default function ExpGrpPC({
                                                   enableReceiptExtract,
                                                 }: {
   enableReceiptExtract: boolean;
@@ -42,9 +42,9 @@ export default function GroupExpensesPageClient({
             <CardHeader className="p-4 sm:p-6 flex flex-row space-y-0 gap-2">
 
               { <CreateFromReceiptButton />}
-              {/* Updated Create Button */}
+              {}
               <Button
-                  variant="default" // or "secondary" depending on your design system
+                  variant="default" 
                   className="flex items-center px-4 py-2"
                   asChild
               >

@@ -34,7 +34,6 @@ export async function extractExpenseInformationFromImage(imageUrl: string) {
     .at(0)
     ?.message.content?.split(',') ?? [null, null, null]
   
-  // Hardcoding categoryId as 0
   const categoryId = 0
 
   return { amount: Number(amountString), categoryId, date, title }

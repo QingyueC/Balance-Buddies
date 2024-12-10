@@ -10,7 +10,7 @@ type Props = {
   expense: Parameters<typeof getBalances>[0][number]
 }
 
-export function ActiveUserBalance({ groupId, currency, expense }: Props) {
+export function ActUserBal({ groupId, currency, expense }: Props) {
   const t = (key: string, params?: Record<string, string | number>) => getVars(`ExpenseCard.${key}`, params);
   const activeUserId = useActiveUser(groupId)
   if (activeUserId === null || activeUserId === '' || activeUserId === 'None') {

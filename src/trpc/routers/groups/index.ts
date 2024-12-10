@@ -1,23 +1,23 @@
 import { createTRPCRouter } from '@/trpc/init'
 import { activitiesRouter } from '@/trpc/routers/groups/activities'
 import { groupBalancesRouter } from '@/trpc/routers/groups/balances'
-import { createGroupProcedure } from '@/trpc/routers/groups/create.procedure'
-import { groupExpensesRouter } from '@/trpc/routers/groups/expenses'
-import { getGroupProcedure } from '@/trpc/routers/groups/get.procedure'
+import { createGrp } from '@/trpc/routers/groups/create.procedure'
+import { grpExpRouter } from '@/trpc/routers/groups/expenses'
+import { getGrp } from '@/trpc/routers/groups/get.procedure'
 import { groupStatsRouter } from '@/trpc/routers/groups/stats'
-import { updateGroupProcedure } from '@/trpc/routers/groups/update.procedure'
-import { getGroupDetailsProcedure } from './getDetails.procedure'
-import { listGroupsProcedure } from './list.procedure'
+import { updateGrp } from '@/trpc/routers/groups/update.procedure'
+import { getGrpDeets } from './getDetails.procedure'
+import { listGrp } from './list.procedure'
 
 export const groupsRouter = createTRPCRouter({
-  expenses: groupExpensesRouter,
+  expenses: grpExpRouter,
   balances: groupBalancesRouter,
   stats: groupStatsRouter,
   activities: activitiesRouter,
 
-  get: getGroupProcedure,
-  getDetails: getGroupDetailsProcedure,
-  list: listGroupsProcedure,
-  create: createGroupProcedure,
-  update: updateGroupProcedure,
+  get: getGrp,
+  getDetails: getGrpDeets,
+  list: listGrp,
+  create: createGrp,
+  update: updateGrp,
 })

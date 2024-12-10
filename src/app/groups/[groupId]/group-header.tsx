@@ -1,12 +1,12 @@
 'use client'
 
-import { GroupTabs } from '@/app/groups/[groupId]/group-tabs'
+import { GrpTab } from '@/app/groups/[groupId]/group-tabs'
 import { ShareButton } from '@/app/groups/[groupId]/share-button'
 import { Skeleton } from '@/components/ui/skeleton'
 import Link from 'next/link'
 import { useCurrentGroup } from './current-group-context'
 
-export const GroupHeader = () => {
+export const GrpHeader = () => {
   const { isLoading, groupId, group } = useCurrentGroup()
 
   return (
@@ -22,7 +22,7 @@ export const GroupHeader = () => {
       </h1>
 
       <div className="flex gap-2 justify-between">
-        <GroupTabs groupId={groupId} />
+        <GrpTab groupId={groupId} />
         {group && <ShareButton group={group} />}
       </div>
     </div>

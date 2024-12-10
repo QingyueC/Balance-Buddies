@@ -3,7 +3,7 @@ import { groupFormSchema } from '@/lib/schemas'
 import { baseProcedure } from '@/trpc/init'
 import { z } from 'zod'
 
-export const createGroupProcedure = baseProcedure
+export const createGrp = baseProcedure
   .input(
     z.object({
       groupFormValues: groupFormSchema,

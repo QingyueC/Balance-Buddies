@@ -3,7 +3,7 @@ import { expenseFormSchema } from '@/lib/schemas'
 import { baseProcedure } from '@/trpc/init'
 import { z } from 'zod'
 
-export const updateGroupExpenseProcedure = baseProcedure
+export const UpdateExpG = baseProcedure
   .input(
     z.object({
       expenseId: z.string().min(1),

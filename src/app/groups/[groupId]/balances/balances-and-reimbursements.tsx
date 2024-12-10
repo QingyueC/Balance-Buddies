@@ -1,6 +1,6 @@
 'use client'
 
-import { BalancesList } from '@/app/groups/[groupId]/balances-list'
+import { ListBal } from '@/app/groups/[groupId]/balances-list'
 import { ReimbursementList } from '@/app/groups/[groupId]/reimbursement-list'
 import {
   Card,
@@ -28,8 +28,7 @@ export default function BalancesAndReimbursements() {
   const t = (key: string, params?: Record<string, string | number>) => getVars(`Balances.${key}`, params)
 
   useEffect(() => {
-    // Until we use tRPC more widely and can invalidate the cache on expense
-    // update, it's easier and safer to invalidate the cache on page load.
+
     utils.groups.balances.invalidate()
   }, [utils])
 
@@ -46,7 +45,7 @@ export default function BalancesAndReimbursements() {
           {isLoading ? (
             <BalancesLoading participantCount={group?.participants.length} />
           ) : (
-            <BalancesList
+            <ListBal
               balances={balancesData.balances}
               participants={group?.participants}
               currency={group?.currency}

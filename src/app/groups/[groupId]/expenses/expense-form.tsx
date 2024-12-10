@@ -162,7 +162,7 @@ export function ExpenseForm({
       ? {
         title: expense.title,
         expenseDate: expense.expenseDate ?? new Date(),
-        amount: String(expense.amount / 100) as unknown as number, // hack
+        amount: String(expense.amount / 100) as unknown as number, 
         category: 0,
         paidBy: expense.paidById,
         paidFor: expense.paidFor.map(({ participantId, shares }) => ({
@@ -181,8 +181,8 @@ export function ExpenseForm({
           expenseDate: new Date(),
           amount: String(
             (Number(searchParams.get('amount')) || 0) / 100,
-          ) as unknown as number, // hack
-          category: 1, // category with Id 1 is Payment
+          ) as unknown as number, 
+          category: 1, 
           paidBy: searchParams.get('from') ?? undefined,
           paidFor: [
             searchParams.get('to')
@@ -203,9 +203,8 @@ export function ExpenseForm({
           expenseDate: searchParams.get('date')
             ? new Date(searchParams.get('date') as string)
             : new Date(),
-          amount: (searchParams.get('amount') || 0) as unknown as number, // hack,
-          category: 0, // category with Id 0 is General
-          // paid for all, split evenly
+          amount: (searchParams.get('amount') || 0) as unknown as number, 
+          category: 0,
           paidFor: defaultSplittingOptions.paidFor,
           paidBy: getSelectedPayer(),
           isReimbursement: false,
@@ -246,7 +245,6 @@ export function ExpenseForm({
   useEffect(() => {
     const splitMode = form.getValues().splitMode
 
-    // Only auto-balance for split mode 'Unevenly - By amount'
     if (
       splitMode === 'BY_AMOUNT' &&
       (form.getFieldState('paidFor').isDirty ||
@@ -312,7 +310,7 @@ export function ExpenseForm({
                 <Image src={Bill} alt="bill image" className='w-24 h-24'></Image>
               </div>
               <div>
-                {/* expense description */}
+                {}
                 <FormField
                   control={form.control}
                   name="title"

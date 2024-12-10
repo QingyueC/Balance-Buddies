@@ -29,7 +29,7 @@ const EXPENSE_GROUPS = {
   OLDER: 'older',
 }
 
-function getExpenseGroup(date: Dayjs, today: Dayjs) {
+function getExpGrp(date: Dayjs, today: Dayjs) {
   if (today.isBefore(date)) {
     return EXPENSE_GROUPS.UPCOMING
   } else if (today.isSame(date, 'week')) {
@@ -50,7 +50,7 @@ function getExpenseGroup(date: Dayjs, today: Dayjs) {
 function getGroupedExpensesByDate(expenses: ExpensesType) {
   const today = dayjs()
   return expenses.reduce((result: { [key: string]: ExpensesType }, expense) => {
-    const expenseGroup = getExpenseGroup(dayjs(expense.expenseDate), today)
+    const expenseGroup = getExpGrp(dayjs(expense.expenseDate), today)
     result[expenseGroup] = result[expenseGroup] ?? []
     result[expenseGroup].push(expense)
     return result
@@ -89,7 +89,7 @@ export function ExpenseList() {
     <>
       {/* Align the search bar to the left */}
       <div className="flex justify-start">
-        <div className="w-full max-w-md"> {/* Constraining width */}
+        <div className="w-full max-w-md"> {}
           <SearchBar onValueChange={(value) => setSearchText(value)} />
         </div>
       </div>
@@ -109,8 +109,6 @@ const ExpenseListForSearch = ({
   const { group } = useCurrentGroup()
 
   useEffect(() => {
-    // Until we use tRPC more widely and can invalidate the cache on expense
-    // update, it's easier and safer to invalidate the cache on page load.
     utils.groups.expenses.invalidate()
   }, [utils])
 

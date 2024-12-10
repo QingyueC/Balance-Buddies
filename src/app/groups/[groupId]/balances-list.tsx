@@ -8,9 +8,7 @@ type Props = {
   currency: string
 }
 
-export function BalancesList({ balances, participants, currency }: Props) {
-
-  // Sort participants alphabetically by name
+export function ListBal({ balances, participants, currency }: Props) {
   const sortedParticipants = [...participants].sort((a, b) =>
     a.name.localeCompare(b.name)
   )
@@ -27,10 +25,10 @@ export function BalancesList({ balances, participants, currency }: Props) {
         {sortedParticipants.map((participant) => {
           const balance = balances[participant.id]?.total ?? 0
           const balanceClass = balance > 0 
-            ? 'text-green-500 font-bold'  // Highlight positive balances in green
+            ? 'text-green-500 font-bold' 
             : balance < 0 
-            ? 'text-red-500 font-bold'   // Highlight negative balances in red
-            : 'text-gray-700';           // Default for zero balance
+            ? 'text-red-500 font-bold'  
+            : 'text-gray-700';           
 
           return (
             <tr key={participant.id}>

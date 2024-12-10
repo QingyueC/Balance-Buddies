@@ -4,8 +4,8 @@ import { useToast } from '@/components/ui/use-toast'
 import { trpc } from '@/trpc/client'
 import { PropsWithChildren, useEffect } from 'react'
 import { CurrentGroupProvider } from './current-group-context'
-import { GroupHeader } from './group-header'
-import { SaveGroupLocally } from './save-recent-group'
+import { GrpHeader } from './group-header'
+import { GrpSaveLocal } from './save-recent-group'
 import { getVars } from '@/vars/getVars'
 
 export function GroupLayoutClient({
@@ -33,7 +33,7 @@ export function GroupLayoutClient({
   if (isLoading) {
     return (
       <CurrentGroupProvider {...props}>
-        <GroupHeader />
+        <GrpHeader />
         {children}
       </CurrentGroupProvider>
     )
@@ -41,9 +41,9 @@ export function GroupLayoutClient({
 
   return (
     <CurrentGroupProvider {...props}>
-      <GroupHeader />
+      <GrpHeader />
       {children}
-      <SaveGroupLocally />
+      <GrpSaveLocal />
     </CurrentGroupProvider>
   )
 }
