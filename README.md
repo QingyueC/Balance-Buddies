@@ -3,7 +3,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 ## Getting Started
 1. First create a .env file in the project folder and copy the contents of .env.example into .env 
 2. Make sure you have postgres installed in your system.
-3. Replace username and password with the local database credentials in the .env file.
+3. Replace username and password with the local database credentials in the .env file along with the S3 credentials and openAPI key.
 
 Next, install dependencies and database migrations.
 ```bash
