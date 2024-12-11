@@ -14,7 +14,6 @@ import { Checkbox } from '@/components/ui/checkbox'
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -129,7 +128,6 @@ async function persistDefaultSplittingOptions(
 
 export function ExpenseForm({
   group,
-  categories,
   expense,
   onSubmit,
   onDelete,
@@ -223,7 +221,6 @@ export function ExpenseForm({
           notes: '',
         },
   })
-  const [isCategoryLoading, setCategoryLoading] = useState(false)
   const activeUserId = useActiveUser(group.id)
 
   const submit = async (values: ExpenseFormValues) => {
@@ -526,30 +523,8 @@ export function ExpenseForm({
                 )}
               />
             </div>
-
-
-
-
-
-
-
-
-            {/* <FormField
-              control={form.control}
-              name="notes"
-              render={({ field }) => (
-                <FormItem className="sm:order-6">
-                  <FormLabel>{t('notesField.label')}</FormLabel>
-                  <FormControl>
-                    <Textarea className="text-base" {...field} />
-                  </FormControl>
-                </FormItem>
-              )}
-            /> */}
           </CardContent>
         </Card>
-
-
 
         {runtimeFeatureFlags.enableExpenseDocuments && (
           <Card className="mt-4">

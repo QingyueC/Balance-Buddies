@@ -43,7 +43,7 @@ describe("Video Component", () => {
     const iframe = screen.getByTitle("YouTube video player");
     expect(iframe).toHaveAttribute(
       "src",
-      "https://www.youtube.com/embed/KKar0Y47q_s?autoplay=1"
+      "https://www.youtube.com/embed/uscDv1eiCpo?autoplay=1"
     );
   });
 });

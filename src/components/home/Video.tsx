@@ -4,7 +4,7 @@ import { useState } from "react";
 export default function Video() {
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const videoId = "KKar0Y47q_s"; // 替换为你的 YouTube 视频 ID
+  const videoId = "uscDv1eiCpo"; // 替换为你的 YouTube 视频 ID
   const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
 
   return (
@@ -15,7 +15,6 @@ export default function Video() {
           height="315"
           src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
           title="YouTube video player"
-          frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
           className="rounded-2xl"
