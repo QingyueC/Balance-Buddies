@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a48b8e6-00d5-49d5-8f29-d354347b6940" name="Changes" comment="page: new image upload button and page">
-      <change beforePath="$PROJECT_DIR$/src/app/groups/[groupId]/expenses/create-from-receipt-button-actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/groups/[groupId]/expenses/import-from-image-button-action.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/groups/[groupId]/expenses/create-from-receipt-button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/groups/[groupId]/expenses/import-from-image-button.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/groups/[groupId]/expenses/page.client.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/groups/[groupId]/expenses/page.client.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vars/vars.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/vars/vars.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
-    </list>
+    <list default="true" id="0a48b8e6-00d5-49d5-8f29-d354347b6940" name="Changes" comment="page: new image upload button and page" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -97,7 +91,7 @@
       <workItem from="1733340981665" duration="10589000" />
       <workItem from="1733351950570" duration="1183000" />
       <workItem from="1733852305587" duration="2212000" />
-      <workItem from="1733939879150" duration="4237000" />
+      <workItem from="1733939879150" duration="4650000" />
     </task>
     <task id="LOCAL-00001" summary="page: new image upload button and page">
       <option name="closed" value="true" />
