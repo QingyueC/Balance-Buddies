@@ -1,11 +1,9 @@
 'use client'
 
-import { CategoryIcon } from '@/app/groups/[groupId]/expenses/category-icon'
 import {
   ReceiptExtractedInfo,
   extractExpenseInformationFromImage,
-} from '@/app/groups/[groupId]/expenses/create-from-receipt-button-actions'
-import { Badge } from '@/components/ui/badge'
+} from '@/app/groups/[groupId]/expenses/import-from-image-button-action'
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -28,24 +26,23 @@ import { useToast } from '@/components/ui/use-toast'
 import { useMediaQuery } from '@/lib/hooks'
 import { formatCurrency, formatDate, formatFileSize } from '@/lib/utils'
 import { trpc } from '@/trpc/client'
-import { ChevronRight, FileQuestion, Loader2, Plus, Receipt } from 'lucide-react'
+import {  FileQuestion, Loader2, Plus, Receipt } from 'lucide-react'
 import { getImageData, usePresignedUpload } from 'next-s3-upload'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { PropsWithChildren, ReactNode, useState } from 'react'
 import { useCurrentGroup } from '../current-group-context'
 import { getVars } from '@/vars/getVars'
-import {bgWhite} from "next/dist/lib/picocolors";
 
 const MAX_FILE_SIZE = 5 * 1024 ** 2
 
-export function CreateFromReceiptButton() {
-  const t = (key: string, params?: Record<string, string | number>) => getVars(`CreateFromReceipt.${key}`, params);
+export function ImportFromImage() {
+  const t = (key: string, params?: Record<string, string | number>) => getVars(`ImportFromImage.${key}`, params);
   const isDesktop = useMediaQuery('(min-width: 640px)')
 
   const DialogOrDrawer = isDesktop
-      ? CreateFromReceiptDialog
-      : CreateFromReceiptDrawer
+      ? ImportFromImageDialog
+      : ImportFromImageDrawer
 
   return (
       <div className="bg-white">
@@ -68,24 +65,24 @@ export function CreateFromReceiptButton() {
             description={<>{t('Dialog.description')}
             </>}
         >
-          <ReceiptDialogContent />
+          <ReceiptDialog />
         </DialogOrDrawer>
       </div>
 
   )
 }
 
-function ReceiptDialogContent() {
+function ReceiptDialog() {
   const { group } = useCurrentGroup()
   const { data: categoriesData } = trpc.categories.list.useQuery()
   const categories = categoriesData?.categories
 
-  const t = (key: string, params?: Record<string, string | number>) => getVars(`CreateFromReceipt.${key}`, params);
+  const t = (key: string, params?: Record<string, string | number>) => getVars(`ImportFromImage.${key}`, params);
   const [pending, setPending] = useState(false)
   const { uploadToS3, FileInput, openFileDialog } = usePresignedUpload()
   const { toast } = useToast()
   const router = useRouter()
-  const [receiptInfo, setReceiptInfo] = useState<
+  const [receipt, setReceipt] = useState<
       | null
       | (ReceiptExtractedInfo & { url: string; width?: number; height?: number })
   >(null)
@@ -112,7 +109,7 @@ function ReceiptDialogContent() {
         const { amount, categoryId, date, title } =
             await extractExpenseInformationFromImage(url)
         const { width, height } = await getImageData(file)
-        setReceiptInfo({ amount, categoryId, date, title, url, width, height })
+        setReceipt({ amount, categoryId, date, title, url, width, height })
       } catch (err) {
         console.error(err)
         toast({
@@ -137,10 +134,8 @@ function ReceiptDialogContent() {
 
   return (
       <div className="bg-white prose prose-sm dark:prose-invert">
-        {/*<p>{t('Dialog.body')}</p>*/}
         <div>
           <FileInput onChange={handleFileChange} accept="image/jpeg,image/png"/>
-          {/*<div className="grid gap-x-4 gap-y-2 grid-cols-3">*/}
           <div className="mt-6 flex flex-col items-center">
             <div className="bg-blue-100 rounded-md w-32 h-32 flex items-center justify-center">
               <Button
@@ -152,12 +147,12 @@ function ReceiptDialogContent() {
               >
                 {pending ? (
                     <Loader2 className="w-8 h-8 animate-spin"/>
-                ) : receiptInfo ? (
+                ) : receipt ? (
                     <div className="absolute top-2 left-2 bottom-2 right-2">
                       <Image
-                          src={receiptInfo.url}
-                          width={receiptInfo.width}
-                          height={receiptInfo.height}
+                          src={receipt.url}
+                          width={receipt.width}
+                          height={receipt.height}
                           className="w-full h-full m-0 object-contain drop-shadow-lg"
                           alt="Scanned receipt"
                       />
@@ -180,19 +175,19 @@ function ReceiptDialogContent() {
               <div className="flex-2">
                 <strong>{t('Dialog.titleLabel')}</strong>
               </div>
-              <div className="">{receiptInfo ? receiptInfo.title ?? <Unknown/> : 'Receipt Title'}</div>
+              <div className="">{receipt? receipt.title ?? <Unknown/> : 'Receipt Title'}</div>
               <div></div>
             </div>
 
             <div className="flex flex-col items-center">
               <strong>{t('Dialog.amountLabel')}</strong>
               <div>
-                {receiptInfo && group ? (
-                    receiptInfo.amount ? (
+                {receipt && group ? (
+                    receipt.amount ? (
                         <>
                           {formatCurrency(
                               group.currency,
-                              receiptInfo.amount,
+                              receipt.amount,
                               true,
                           )}
                         </>
@@ -205,17 +200,17 @@ function ReceiptDialogContent() {
             <div className="flex flex-col items-center">
               <strong>{t('Dialog.dateLabel')}</strong>
               <div>
-                {receiptInfo ? (
-                    receiptInfo.date ? (
+                {receipt ? (
+                    receipt.date ? (
                         formatDate(
-                            new Date(`${receiptInfo?.date}T12:00:00.000Z`),
+                            new Date(`${receipt?.date}T12:00:00.000Z`),
                             {dateStyle: 'medium'},
                         )
                     ) : (
                         <Unknown/>
                     )
                 ) : (
-                    'yyyy/mm/dd'
+                    'mm/dd/yyyy'
                 )}
               </div>
             </div>
@@ -226,19 +221,19 @@ function ReceiptDialogContent() {
         </div>
         <div className="text-center">
           <Button
-              disabled={pending || !receiptInfo}
+              disabled={pending || !receipt}
               onClick={() => {
-                if (!receiptInfo || !group) return
+                if (!receipt || !group) return
                 router.push(
                     `/groups/${group.id}/expenses/create?amount=${
-                        receiptInfo.amount
-                    }&categoryId=${receiptInfo.categoryId}&date=${
-                        receiptInfo.date
+                        receipt.amount
+                    }&categoryId=${receipt.categoryId}&date=${
+                        receipt.date
                     }&title=${encodeURIComponent(
-                        receiptInfo.title ?? '',
-                    )}&imageUrl=${encodeURIComponent(receiptInfo.url)}&imageWidth=${
-                        receiptInfo.width
-                    }&imageHeight=${receiptInfo.height}`,
+                        receipt.title ?? '',
+                    )}&imageUrl=${encodeURIComponent(receipt.url)}&imageWidth=${
+                        receipt.width
+                    }&imageHeight=${receipt.height}`,
                 )
               }}
           >
@@ -250,7 +245,7 @@ function ReceiptDialogContent() {
 }
 
 function Unknown() {
-  const t = (key: string, params?: Record<string, string | number>) => getVars(`CreateFromReceipt.${key}`, params);
+  const t = (key: string, params?: Record<string, string | number>) => getVars(`ImportFromImage.${key}`, params);
   return (
       <div className="flex gap-1 items-center text-muted-foreground">
         <FileQuestion className="w-4 h-4" />
@@ -259,7 +254,7 @@ function Unknown() {
   )
 }
 
-function CreateFromReceiptDialog({
+function ImportFromImageDialog({
                                    trigger,
                                    title,
                                    description,
@@ -285,7 +280,7 @@ function CreateFromReceiptDialog({
   )
 }
 
-function CreateFromReceiptDrawer({
+function ImportFromImageDrawer({
                                    trigger,
                                    title,
                                    description,

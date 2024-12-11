@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0a48b8e6-00d5-49d5-8f29-d354347b6940" name="Changes" comment="page: new image upload button and page">
+      <change beforePath="$PROJECT_DIR$/src/app/groups/[groupId]/expenses/create-from-receipt-button-actions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/groups/[groupId]/expenses/import-from-image-button-action.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/groups/[groupId]/expenses/create-from-receipt-button.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/groups/[groupId]/expenses/import-from-image-button.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/groups/[groupId]/expenses/page.client.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/groups/[groupId]/expenses/page.client.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vars/vars.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/vars/vars.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="updates" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2pB2NLgXKDfb0yTrQtjD7DVMhx8" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Software Engineering/ExampleSplit&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\Software Engineering\\BalanceBuddies\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Software Engineering\BalanceBuddies" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.dev" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-e768b9ed790e-JavaScript-WS-243.21565.180" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0a48b8e6-00d5-49d5-8f29-d354347b6940" name="Changes" comment="" />
+      <created>1732225106708</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1732225106708</updated>
+      <workItem from="1732225107912" duration="4764000" />
+      <workItem from="1732565255637" duration="3785000" />
+      <workItem from="1733002432455" duration="3264000" />
+      <workItem from="1733188287064" duration="2309000" />
+      <workItem from="1733240963782" duration="3725000" />
+      <workItem from="1733339979527" duration="678000" />
+      <workItem from="1733340981665" duration="10589000" />
+      <workItem from="1733351950570" duration="1183000" />
+      <workItem from="1733852305587" duration="2212000" />
+      <workItem from="1733939879150" duration="4237000" />
+    </task>
+    <task id="LOCAL-00001" summary="page: new image upload button and page">
+      <option name="closed" value="true" />
+      <created>1733352528657</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1733352528657</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="page: new image upload button and page" />
+    <option name="LAST_COMMIT_MESSAGE" value="page: new image upload button and page" />
+  </component>
+</project>

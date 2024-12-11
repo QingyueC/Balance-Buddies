@@ -1,3 +1,5 @@
+import {ImportFromImage} from "@/app/groups/[groupId]/expenses/import-from-image-button";
+
 const vars =
     {
       "Homepage": {
@@ -218,7 +220,7 @@ const vars =
           "retry": "Retry"
         }
       },
-      "CreateFromReceipt": {
+      "ImportFromImage": {
         "Dialog": {
           "triggerTitle": "Create expense from receipt",
           "title": "Import Receipt Image",

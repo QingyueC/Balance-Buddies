@@ -1,7 +1,7 @@
 'use client'
 
 import { ActiveUserModal } from '@/app/groups/[groupId]/expenses/active-user-modal';
-import { CreateFromReceiptButton } from '@/app/groups/[groupId]/expenses/create-from-receipt-button';
+import { ImportFromImage} from '@/app/groups/[groupId]/expenses/import-from-image-button';
 import { ExpenseList } from '@/app/groups/[groupId]/expenses/expense-list';
 import { Button } from '@/components/ui/button';
 import {
@@ -41,7 +41,7 @@ export default function ExpGrpPC({
             </CardHeader>
             <CardHeader className="p-4 sm:p-6 flex flex-row space-y-0 gap-2">
 
-              { <CreateFromReceiptButton />}
+              { <ImportFromImage />}
               {}
               <Button
                   variant="default" 
