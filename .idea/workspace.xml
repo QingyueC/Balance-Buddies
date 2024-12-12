@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0a48b8e6-00d5-49d5-8f29-d354347b6940" name="Changes" comment="page: new image upload button and page" />
+    <list default="true" id="0a48b8e6-00d5-49d5-8f29-d354347b6940" name="Changes" comment="page: new image upload button and page">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,7 +35,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Software Engineering/ExampleSplit&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Software Engineering/BalanceBuddies/public/figma&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -46,6 +48,7 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Software Engineering\BalanceBuddies\public\figma" />
       <recent name="D:\Software Engineering\BalanceBuddies" />
     </key>
   </component>
@@ -91,7 +94,7 @@
       <workItem from="1733340981665" duration="10589000" />
       <workItem from="1733351950570" duration="1183000" />
       <workItem from="1733852305587" duration="2212000" />
-      <workItem from="1733939879150" duration="4650000" />
+      <workItem from="1733939879150" duration="4967000" />
     </task>
     <task id="LOCAL-00001" summary="page: new image upload button and page">
       <option name="closed" value="true" />
